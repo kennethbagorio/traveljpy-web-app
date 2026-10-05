@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Japan Trip · Nov 11–20, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E7EAEE; --sign:#FFFFFF; --ink:#18202E; --muted:#5B6474; --rule:#D3D8DF;
+  --osaka:#D4461F; --kyoto:#7E3C98; --nara:#2F8642; --tokyo:#1C61C4; --rail:#18202E;
+  --chip:#F1F3F6; --focus:#1C61C4;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161F; --sign:#1A212D; --ink:#EEF1F5; --muted:#A3ACBA; --rule:#2C3545;
+    --osaka:#F0714B; --kyoto:#B27BCB; --nara:#5DB86E; --tokyo:#5B9BF0; --rail:#EEF1F5;
+    --chip:#242C3A; --focus:#5B9BF0;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161F; --sign:#1A212D; --ink:#EEF1F5; --muted:#A3ACBA; --rule:#2C3545;
+  --osaka:#F0714B; --kyoto:#B27BCB; --nara:#5DB86E; --tokyo:#5B9BF0; --rail:#EEF1F5;
+  --chip:#242C3A; --focus:#5B9BF0;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP","Yu Gothic",system-ui,sans-serif;
+  font-size:16px; line-height:1.55; -webkit-text-size-adjust:100%;
+}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus); outline-offset:2px; border-radius:4px}
+.wrap{max-width:680px; margin:0 auto; padding:16px 14px 48px}
+
+/* Station nameboard hero */
+.board{
+  background:var(--sign); border-radius:6px; padding:22px 18px 0; position:relative; overflow:hidden;
+  box-shadow:0 1px 0 var(--rule);
+}
+.board h1{margin:0; text-align:center; font-weight:900; font-size:clamp(44px,14vw,76px); line-height:1; letter-spacing:.02em}
+.board .romaji{text-align:center; font-size:clamp(20px,5.5vw,28px); font-weight:700; margin:6px 0 2px; letter-spacing:.04em}
+.board .sub{text-align:center; color:var(--muted); font-size:14px; margin:0 0 18px}
+.route{display:flex; height:30px; margin:0 -18px}
+.route span{flex:var(--n); display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:700; white-space:nowrap; overflow:hidden}
+.ends{display:flex; justify-content:space-between; font-size:13px; font-weight:500; padding:10px 0 14px}
+.ends b{display:block; font-size:16px}
+.ends div:last-child{text-align:right}
+.facts{margin:14px 2px 0; font-size:15px; color:var(--muted)}
+.facts strong{color:var(--ink)}
+
+/* Day selector */
+.sel{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); margin:22px -14px 0; padding:10px 14px 8px}
+.sel h2{margin:0 0 8px; font-size:15px; font-weight:700}
+.pills{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; padding-bottom:4px}
+.pills::-webkit-scrollbar{display:none}
+.pill{
+  flex:0 0 auto; border:2px solid var(--c); background:var(--sign); color:var(--ink);
+  border-radius:999px; padding:5px 11px; font:inherit; font-size:13px; font-weight:700; cursor:pointer; line-height:1.2;
+}
+.pill small{display:block; font-weight:500; font-size:11px; color:var(--muted)}
+.pill[aria-pressed="true"]{background:var(--c); color:#fff}
+.pill[aria-pressed="true"] small{color:#fff; opacity:.85}
+
+/* Day card */
+.day{background:var(--sign); border-radius:6px; margin-top:6px; overflow:hidden}
+.dayhead{border-top:8px solid var(--c); padding:18px 18px 12px; display:grid; grid-template-columns:1fr auto; gap:4px 12px; align-items:end}
+.dayhead .kanji{grid-row:span 2; font-size:46px; font-weight:900; line-height:1; color:var(--c)}
+.dayhead .date{font-size:14px; color:var(--muted); font-weight:500}
+.dayhead h3{margin:0; font-size:22px; line-height:1.25; font-weight:900; grid-column:1}
+.dayhead .kanji{grid-column:2; grid-row:1 / span 2}
+.nav{display:flex; justify-content:space-between; background:var(--c); color:#fff}
+.nav button{background:none; border:0; color:#fff; font:inherit; font-size:13px; font-weight:700; padding:9px 14px; cursor:pointer}
+.nav button:disabled{opacity:.35; cursor:default}
+.stops{list-style:none; margin:0; padding:14px 18px 6px}
+.stop{position:relative; padding:0 0 18px 30px}
+.stop::before{content:""; position:absolute; left:8px; top:8px; bottom:-8px; width:4px; background:var(--c); opacity:.3}
+.stop:last-child::before{display:none}
+.stop::after{content:""; position:absolute; left:2px; top:4px; width:16px; height:16px; border-radius:50%; background:var(--sign); border:4px solid var(--c)}
+.stop .when{font-size:13px; font-weight:700; color:var(--c)}
+.stop .what{font-size:17px; font-weight:700; line-height:1.35}
+.stop .what a{text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:3px; text-decoration-color:var(--c)}
+.stop .how{font-size:14px; color:var(--muted); margin-top:2px}
+.stop .about{margin:4px 0 0; font-size:15px}
+.stop .go{margin:6px 0 0; font-size:14px; color:var(--muted)}
+.stop .go b{color:var(--ink)}
+.price{display:inline-block; margin-top:6px; background:var(--chip); border-radius:4px; padding:2px 8px; font-size:13px; font-weight:700}
+.price.free{color:var(--nara)}
+.note{margin:0 18px 18px; padding:10px 12px; border-left:4px solid var(--c); background:var(--chip); font-size:14px}
+.daytotal{padding:0 18px 16px; font-size:14px; color:var(--muted)}
+.daytotal strong{color:var(--ink)}
+
+
+.pic{display:block; width:100%; height:auto; aspect-ratio:12/5; border-radius:6px; margin:6px 0 8px}
+/* Day costs */
+.cost{margin:4px 18px 18px; border-top:2px solid var(--rule); padding-top:14px}
+.cost h4{margin:0 0 2px; font-size:18px; font-weight:900}
+.cost .per{margin:0 0 12px; font-size:13px; color:var(--muted)}
+.cgrp{margin-bottom:12px}
+.cgrp .gh{display:flex; justify-content:space-between; font-size:14px; font-weight:700; padding-bottom:4px; border-bottom:1px solid var(--rule)}
+.cgrp .gh i{font-style:normal; display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; background:var(--g)}
+.cgrp ul{list-style:none; margin:0; padding:4px 0 0}
+.cgrp li{display:flex; justify-content:space-between; gap:10px; font-size:14px; padding:2px 0; color:var(--muted)}
+.cgrp li span:last-child{color:var(--ink); white-space:nowrap}
+.cgrp .none{font-size:14px; color:var(--muted); padding-top:4px}
+.stack{display:flex; height:10px; border-radius:5px; overflow:hidden; background:var(--chip); margin:0 0 14px}
+.stack span{height:100%}
+.ctot{display:grid; grid-template-columns:1fr 1fr; gap:10px; padding-top:10px; border-top:2px solid var(--rule)}
+.ctot span{display:block; font-size:13px; color:var(--muted)}
+.ctot b{font-size:22px; font-weight:900; line-height:1.2}
+.ctot em{display:block; font-style:normal; font-size:13px; color:var(--muted)}
+
+section.block{margin-top:28px}
+section.block.first{margin-top:10px}
+section.block > h2{font-size:22px; font-weight:900; margin:0 0 4px}
+section.block > p.lead{margin:0 0 12px; color:var(--muted); font-size:15px}
+.card{background:var(--sign); border-radius:6px; padding:16px 18px}
+
+/* Budget */
+.ctrls{display:grid; gap:14px}
+.row{display:flex; align-items:center; justify-content:space-between; gap:12px}
+.row label{font-weight:700; font-size:15px}
+.step{display:flex; align-items:center; gap:4px}
+.step button{width:38px; height:38px; border-radius:50%; border:2px solid var(--rule); background:var(--sign); color:var(--ink); font:inherit; font-size:20px; font-weight:700; cursor:pointer}
+.step output{min-width:34px; text-align:center; font-size:20px; font-weight:900}
+.seg{display:inline-flex; border:2px solid var(--rule); border-radius:999px; overflow:hidden}
+.seg button{border:0; background:none; color:var(--ink); font:inherit; font-size:14px; font-weight:700; padding:7px 14px; cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--tokyo); color:#fff}
+.tog{display:flex; align-items:center; gap:10px; font-size:15px}
+.tog input{width:22px; height:22px; accent-color:var(--tokyo)}
+.rate input{width:86px; font:inherit; font-size:15px; padding:6px 8px; border:2px solid var(--rule); border-radius:6px; background:var(--sign); color:var(--ink)}
+.bars{margin-top:18px; display:grid; gap:10px}
+.bar .lbl{display:flex; justify-content:space-between; font-size:14px; font-weight:500}
+.bar .track{height:12px; background:var(--chip); border-radius:6px; overflow:hidden; margin-top:4px}
+.bar .fill{height:100%; border-radius:6px; transition:width .35s ease}
+.total{margin-top:18px; padding-top:14px; border-top:2px solid var(--rule); display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.total div span{display:block; font-size:13px; color:var(--muted)}
+.total div b{font-size:24px; font-weight:900; line-height:1.2}
+.total div em{font-style:normal; font-size:14px; color:var(--muted)}
+.fine{font-size:13px; color:var(--muted); margin:12px 0 0}
+
+/* Checklist */
+.checks{list-style:none; margin:0; padding:0}
+.checks li{border-bottom:1px solid var(--rule)}
+.checks li:last-child{border-bottom:0}
+.checks label{display:flex; gap:12px; padding:12px 0; cursor:pointer; font-size:15px}
+.checks input{flex:0 0 auto; width:22px; height:22px; margin-top:1px; accent-color:var(--nara)}
+.checks input:checked + span{color:var(--muted); text-decoration:line-through}
+.checks b{display:block}
+.prog{font-size:14px; color:var(--muted); margin:0 0 6px}
+
+.tips{margin:0; padding-left:20px}
+.tips li{margin-bottom:8px; font-size:15px}
+footer{margin-top:28px; font-size:13px; color:var(--muted)}
+footer a{margin-right:10px}
+
+@media (prefers-reduced-motion: reduce){ .bar .fill{transition:none} }
+
+
+/* Maps */
+.dirbtn{display:flex; align-items:center; gap:6px; margin-top:10px; border:2px solid var(--c); background:var(--sign); color:var(--ink); border-radius:999px; padding:6px 14px; font:inherit; font-size:14px; font-weight:700; cursor:pointer}
+.dirbtn::before{content:""; width:10px; height:10px; border-radius:50% 50% 50% 0; transform:rotate(-45deg); background:var(--c)}
+.dirbtn[aria-expanded="true"]{background:var(--c); color:#fff}
+.dirbtn[aria-expanded="true"]::before{background:#fff}
+.dirpanel{margin-top:10px; background:var(--chip); border-radius:6px; padding:10px}
+.dirctl{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:8px}
+.seg{display:inline-flex; border:2px solid var(--rule); border-radius:999px; overflow:hidden; background:var(--sign)}
+.seg button{border:0; background:none; color:var(--ink); font:inherit; font-size:13px; font-weight:700; padding:6px 12px; cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--c); color:#fff}
+.seg button:disabled{opacity:.4; cursor:default}
+.dirsum{margin:0 0 8px; font-size:14px}
+.mapbox{width:100%; height:280px; border-radius:6px; overflow:hidden; background:var(--rule)}
+.steps{margin-top:8px; font-size:14px}
+.steps summary{cursor:pointer; font-weight:700}
+.steps ol{margin:6px 0 0; padding-left:20px}
+.steps li{margin-bottom:4px}
+.steps li span{color:var(--muted)}
+.svbox{position:relative; margin-bottom:10px; border-radius:6px; overflow:hidden; background:var(--rule)}
+.svbox img{display:block; width:100%; height:auto; aspect-ratio:64/30; object-fit:cover}
+.svbox span{position:absolute; left:8px; bottom:8px; background:rgba(0,0,0,.6); color:#fff; font-size:12px; font-weight:700; padding:2px 8px; border-radius:4px}
+.mapbox{position:relative; z-index:0}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.9) contrast(.9)} }
+:root[data-theme="dark"] .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.9) contrast(.9)}
+.youdot,.prevdot{display:none}
+.trainnote{margin:8px 0 0; font-size:13px; color:var(--muted)}
+.trainnote b{color:var(--ink)}
+.youdot{width:16px; height:16px; border-radius:50%; background:#1A73E8; border:3px solid #fff; box-shadow:0 0 0 6px rgba(26,115,232,.25)}
+.prevdot{width:14px; height:14px; border-radius:50%; background:#5B6474; border:3px solid #fff}
+
+/* Editing */
+[hidden]{display:none !important}
+.selhead{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px}
+.selhead h2{margin:0}
+.ghost{border:2px solid var(--rule); background:var(--sign); color:var(--ink); border-radius:999px; padding:5px 12px; font:inherit; font-size:13px; font-weight:700; cursor:pointer}
+.meta{margin:6px 2px 0; font-size:13px; color:var(--muted)}
+.editp{background:var(--sign); border:2px dashed var(--tokyo); border-radius:6px; padding:14px 16px; margin:6px 0 10px}
+.editp h3{margin:0 0 4px; font-size:17px; font-weight:900}
+.editp p{margin:0 0 8px; font-size:14px; color:var(--muted)}
+.editp textarea{width:100%; min-height:84px; font:inherit; font-size:15px; padding:10px; border:2px solid var(--rule); border-radius:6px; background:var(--bg); color:var(--ink); resize:vertical}
+.btnrow{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
+.btn{border:0; border-radius:6px; padding:9px 14px; font:inherit; font-size:14px; font-weight:700; cursor:pointer; background:var(--tokyo); color:#fff}
+.btn.alt{background:var(--chip); color:var(--ink)}
+.btn:disabled{opacity:.5; cursor:default}
+#aiStatus{margin-top:8px; font-size:14px; color:var(--ink)}
+#costHint{font-size:13px; color:var(--osaka); margin:8px 0 0}
+.dayedit{display:flex; gap:8px; flex-wrap:wrap; padding:12px 18px 0}
+.dayedit button,.tools button{border:1px solid var(--rule); background:var(--chip); color:var(--ink); border-radius:4px; padding:4px 10px; font:inherit; font-size:13px; font-weight:700; cursor:pointer}
+.tools{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:6px}
+.tools button:disabled{opacity:.4}
+#savebar{position:fixed; left:0; right:0; bottom:0; z-index:20; background:var(--ink); color:var(--sign); display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px))}
+#savebar span{font-size:14px; font-weight:700}
+#savebar .btn.alt{background:transparent; color:var(--sign); border:1px solid var(--sign)}
+body.hasbar .wrap{padding-bottom:110px}
+#flash{position:fixed; left:50%; transform:translateX(-50%); bottom:calc(20px + env(safe-area-inset-bottom,0px)); background:var(--nara); color:#fff; padding:10px 16px; border-radius:6px; font-size:14px; font-weight:700; z-index:30}
+dialog{border:0; border-radius:8px; padding:0; width:min(560px,94vw); background:var(--sign); color:var(--ink)}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+dialog form{padding:18px; display:grid; gap:10px; max-height:85vh; overflow:auto}
+dialog h3{margin:0; font-size:19px; font-weight:900}
+dialog label{display:grid; gap:4px; font-size:14px; font-weight:700}
+dialog label small{font-weight:400; color:var(--muted)}
+dialog input,dialog textarea,dialog select{font:inherit; font-size:15px; padding:8px; border:2px solid var(--rule); border-radius:6px; background:var(--bg); color:var(--ink)}
+dialog textarea{min-height:76px; resize:vertical}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="board" aria-label="Trip overview">
+    <h1 lang="ja">日本</h1>
+    <p class="romaji">Japan, Nov 11–20, 2026</p>
+    <p class="sub">4 travellers</p>
+    <div class="route" aria-hidden="true">
+      <span style="--n:2;background:var(--osaka)">Osaka</span>
+      <span style="--n:1;background:var(--kyoto)">Kyoto</span>
+      <span style="--n:1;background:var(--nara)">Nara</span>
+      <span style="--n:6;background:var(--tokyo)">Tokyo</span>
+    </div>
+    <div class="ends">
+      <div>From<b>Kansai Airport</b>Wed Nov 11, 6:20 PM</div>
+      <div>To<b>Tokyo</b>Fri Nov 20, travel only</div>
+    </div>
+  </header>
+
+  <p class="facts">3 nights in <strong>Osaka</strong> with a full Kyoto day trip, a Nara morning on the way out, then 6 nights in <strong>Tokyo</strong>. Start with Before you go, then tap a day to see its plan, pictures and costs. Every place name opens Google Maps.</p>
+  <p class="meta" id="meta"></p>
+
+  <nav class="sel" aria-label="Choose a day">
+    <div class="selhead"><h2>Pick a page</h2><button type="button" id="editBtn" class="ghost" hidden>Edit plan</button></div>
+    <div class="pills" id="pills" role="group"></div>
+  </nav>
+
+  <section class="editp" id="editPanel" hidden aria-labelledby="eh">
+    <h3 id="eh">Change the plan</h3>
+    <p>Tell the AI what to change, in plain words. It updates the stops, directions and that day's costs. Or use the Edit buttons on each stop.</p>
+    <textarea id="aiText" placeholder="e.g. Swap Mt Takao for a Kamakura day trip on Nov 17, and move teamLab to the 18th"></textarea>
+    <div class="btnrow">
+      <button type="button" class="btn" id="aiGo">Ask AI to change it</button>
+      <button type="button" class="btn alt" id="aiCost">Recompute all costs with AI</button>
+    </div>
+    <p id="costHint" hidden>You changed stops by hand, so costs may be out of date. Tap Recompute all costs with AI.</p>
+    <p id="aiStatus" role="status"></p>
+  </section>
+
+  <article class="day" id="day" aria-live="polite"></article>
+
+  <div id="general" hidden>
+  <section class="block first" id="book" aria-labelledby="kh">
+    <h2 id="kh">Book before you fly</h2>
+    <p class="lead">Ticks are saved on your own phone only.</p>
+    <div class="card">
+      <p class="prog" id="prog"></p>
+      <ul class="checks" id="checks"></ul>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="th">
+    <h2 id="th">Good to know</h2>
+    <div class="card">
+      <ul class="tips">
+        <li><b>Weather:</b> about 8–17°C, mostly dry. Bring a light jacket and shoes you can walk in all day.</li>
+        <li><b>Sunset is around 4:45 PM,</b> so outdoor sights are scheduled before then; Kyoto and Nara days start early.</li>
+        <li><b>Autumn leaves run late in 2026.</b> Expect early colour in Kyoto and Tokyo; Mt Takao (Nov 17) is the best bet for full colour.</li>
+        <li><b>Pay with your phone:</b> add a Suica or ICOCA card to Apple Wallet or Google Wallet for trains and convenience stores. Carry ¥10,000–20,000 cash for temples and stalls.</li>
+        <li><b>Taxis make sense for 4:</b> a short ride split four ways often costs about the same as the bus.</li>
+        <li><b>Before flying:</b> register on Visit Japan Web for faster immigration and customs.</li>
+      </ul>
+    </div>
+  </section>
+
+  </div>
+
+  <footer>
+    <p>Prices checked October 2026 and can change. Sources:
+      <a href="https://selfguidejapan.com/blog/things-to-do-in-kyoto">Kyoto fees</a>
+      <a href="https://watabi.org/en/articles/osaka-castle-guide">Osaka Castle</a>
+      <a href="https://selfguidejapan.com/blog/tokyo-to-kyoto">Shinkansen</a>
+      <a href="https://www.gotokyo.org/tc/spot/1749/index.html">Shibuya Sky</a>
+      <a href="https://www.artvisitguide.com/teamlab-planets-vs-borderless-tokyo/">teamLab</a>
+      <a href="https://thejapanode.com/guides/kansai-airport-transport-guide">KIX trains</a>
+      <a href="https://www.nippon.com/en/japan-data/h02888/">Leaf forecast</a>
+    </p>
+  </footer>
+</div>
+
+<div id="savebar" hidden><span>Unsaved changes</span><div class="btnrow" style="margin:0"><button type="button" class="btn alt" id="discard">Discard</button><button type="button" class="btn" id="save">Save for everyone</button></div></div>
+<div id="flash" role="status" hidden></div>
+
+<dialog id="unlock"><form id="unlockForm">
+  <h3>Edit the plan</h3>
+  <label>Your name<small>Shown as "last updated by"</small><input id="uName" autocomplete="given-name" maxlength="40"></label>
+  <label>Group passcode<input id="uCode" type="password" required autocomplete="off"></label>
+  <div class="btnrow"><button type="submit" class="btn">Start editing</button><button type="button" class="btn alt" data-close>Cancel</button></div>
+</form></dialog>
+
+<dialog id="stopDlg"><form id="stopForm">
+  <h3 id="stopTitle">Edit stop</h3>
+  <label>Time<input id="fWhen" maxlength="40" placeholder="9:00 AM"></label>
+  <label>Place name<input id="fName" maxlength="100" required></label>
+  <label>Google Maps search<small>What to search for, e.g. "Osaka Castle Main Tower"</small><input id="fMap" maxlength="120"></label>
+  <label>What it is<textarea id="fAbout" maxlength="700"></textarea></label>
+  <label>How to get there<textarea id="fHow" maxlength="700"></textarea></label>
+  <label>Entry price label<small>e.g. ¥500 or Free</small><input id="fPrice" maxlength="40"></label>
+  <label>Picture<select id="fPic"></select></label>
+  <div class="btnrow"><button type="submit" class="btn">Done</button><button type="button" class="btn alt" data-close>Cancel</button></div>
+</form></dialog>
+
+<dialog id="dayDlg"><form id="dayForm">
+  <h3>Edit day</h3>
+  <label>Day title<input id="dTitle" maxlength="120" required></label>
+  <label>Note<small>Optional tip shown under the stops</small><textarea id="dNote" maxlength="400"></textarea></label>
+  <div class="btnrow"><button type="submit" class="btn">Done</button><button type="button" class="btn alt" data-close>Cancel</button></div>
+</form></dialog>
+
+<script>
+const DEFAULT = {
+ "version": 0,
+ "days": [
+  {
+   "d": "Wed Nov 11",
+   "short": "Nov 11",
+   "city": "osaka",
+   "t": "Arrive and eat in Dotonbori",
+   "note": "",
+   "stops": [
+    {
+     "when": "6:20 PM",
+     "name": "Land at Kansai Airport",
+     "map": "",
+     "about": "Osaka's international airport, built on a man-made island in Osaka Bay. Allow about an hour for immigration, bags and customs.",
+     "how": "After customs, follow the signs for Railways. The station is across the walkway from Terminal 1 arrivals; Terminal 2 has a free shuttle bus to it.",
+     "price": "",
+     "pic": "plane"
+    },
+    {
+     "when": "~7:30 PM",
+     "name": "Nankai Rapi:t to Namba",
+     "map": "Kansai Airport Station",
+     "about": "Nankai's limited express into the city: the blue train with round porthole windows, reserved seats and luggage racks. 38 minutes to Namba.",
+     "how": "At Kansai-Airport Station, buy tickets at the Nankai counter or machines (Nankai, not JR). Ride to the last stop, Namba. Cheaper option: the Nankai Airport Express, ~50 min, ¥970.",
+     "price": "¥1,450–1,700",
+     "pic": "train"
+    },
+    {
+     "when": "Night",
+     "name": "Dotonbori",
+     "map": "Dotonbori Osaka",
+     "about": "Osaka's canal-side street of neon signs, giant food billboards and the Glico running-man sign. Try takoyaki (octopus balls) and okonomiyaki (savoury pancake).",
+     "how": "From Nankai Namba Station, walk about 10 minutes north following signs for Dotonbori. Ebisu Bridge is the best spot for the Glico sign.",
+     "price": "Free",
+     "pic": "dotonbori"
+    }
+   ],
+   "cost": {
+    "entry": [],
+    "train": [
+     [
+      "Nankai Rapi:t, airport to Namba",
+      1450
+     ]
+    ],
+    "food": [
+     [
+      "Street-food dinner in Dotonbori",
+      2000
+     ]
+    ]
+   }
+  },
+  {
+   "d": "Thu Nov 12",
+   "short": "Nov 12",
+   "city": "osaka",
+   "t": "Osaka city tour: castle, Shinsekai, Umeda Sky",
+   "note": "",
+   "stops": [
+    {
+     "when": "9:00 AM",
+     "name": "Osaka Castle",
+     "map": "Osaka Castle Main Tower",
+     "about": "Built in 1583 by the warlord Toyotomi Hideyoshi. Today's tower is a museum of samurai history with an 8th-floor lookout, set in a big park with massive stone walls and moats.",
+     "how": "From Namba, Midosuji line to Hommachi, change to the Chuo line to Tanimachi 4-chome (exit 9), about 20 min. Then a 15-min walk through the park to the tower.",
+     "price": "¥1,200",
+     "pic": "castle"
+    },
+    {
+     "when": "12:30 PM",
+     "name": "Shinsekai and Tsutenkaku",
+     "map": "Shinsekai Osaka",
+     "about": "\"New World\", a retro neighbourhood from 1912 with neon signs, old arcades and the Tsutenkaku tower. It's the home of kushikatsu, deep-fried skewers; the house rule is no double-dipping in the shared sauce.",
+     "how": "From Tanimachi 4-chome, Tanimachi line to Tennoji (~10 min), then a 10-min walk west. Going up Tsutenkaku is optional.",
+     "price": "Free to walk",
+     "pic": "shinsekai"
+    },
+    {
+     "when": "4:00 PM",
+     "name": "Umeda Sky Building",
+     "map": "Umeda Sky Building Floating Garden Observatory",
+     "about": "Twin 173 m towers joined at the top by an open-air rooftop ring, the Floating Garden. One of Osaka's best sunset views (~4:50 PM).",
+     "how": "From Shinsekai, Midosuji line from Dobutsuen-mae to Umeda (~15 min). Walk 10 min northwest from the north side of JR Osaka Station through the underpass. For dinner, Midosuji line back to Namba (~10 min) and walk to Hozenji Yokocho, a lantern-lit stone alley near the hotel.",
+     "price": "~¥2,000",
+     "pic": "umeda"
+    }
+   ],
+   "cost": {
+    "entry": [
+     [
+      "Osaka Castle main tower",
+      1200
+     ],
+     [
+      "Umeda Sky Building",
+      2000
+     ]
+    ],
+    "train": [
+     [
+      "Osaka Metro, 4 rides",
+      900
+     ]
+    ],
+    "food": [
+     [
+      "Breakfast",
+      800
+     ],
+     [
+      "Kushikatsu lunch in Shinsekai",
+      2000
+     ],
+     [
+      "Dinner at Hozenji Yokocho, Namba",
+      3000
+     ]
+    ]
+   }
+  },
+  {
+   "d": "Fri Nov 13",
+   "short": "Nov 13",
+   "city": "kyoto",
+   "t": "Kyoto day trip: Fushimi Inari, Kiyomizu-dera, Arashiyama",
+   "note": "",
+   "stops": [
+    {
+     "when": "7:15 AM",
+     "name": "Train to Kyoto",
+     "map": "Yodoyabashi Station",
+     "about": "The Keihan line is a private railway that runs straight to Kyoto's eastern sights, so no buses are needed this morning.",
+     "how": "From Namba, Midosuji line to Yodoyabashi (~8 min). Follow the green Keihan signs and take a train toward Demachiyanagi; change to a local train (Tambabashi is easiest) for Fushimi-Inari. About 50 min in total.",
+     "price": "~¥700",
+     "pic": ""
+    },
+    {
+     "when": "8:15 AM",
+     "name": "Fushimi Inari Taisha",
+     "map": "Fushimi Inari Taisha",
+     "about": "Head shrine of Inari, god of rice and business, founded in 711. Thousands of vermilion torii gates, each donated by a business, form tunnels up Mt Inari. Walk to the Yotsutsuji viewpoint (~45 min up) and back.",
+     "how": "From Fushimi-Inari Station (Keihan), walk 5 min east up the shop street to the big gate.",
+     "price": "Free",
+     "pic": "torii"
+    },
+    {
+     "when": "10:30 AM",
+     "name": "Kiyomizu-dera and the old lanes",
+     "map": "Kiyomizu-dera",
+     "about": "A 1,200-year-old hillside temple famous for its huge wooden stage, built without nails. Below it, Sannenzaka and Ninenzaka are stone-paved lanes of old wooden shops and tea houses: have lunch here.",
+     "how": "Back at Fushimi-Inari Station, Keihan line 3 stops north to Kiyomizu-Gojo (~5 min). Then a taxi up the hill (~5 min) or a 20-min uphill walk.",
+     "price": "¥500",
+     "pic": "kiyomizu"
+    },
+    {
+     "when": "2:00 PM",
+     "name": "Arashiyama Bamboo Grove and Tenryu-ji",
+     "map": "Arashiyama Bamboo Grove",
+     "about": "Western Kyoto's riverside district. A path through towering bamboo stalks runs beside Tenryu-ji, a Zen temple with a 700-year-old landscape garden (closes 5:00 PM).",
+     "how": "Taxi from the bottom of Ninenzaka or Yasaka Shrine to Tenryu-ji, about 40 min (~¥4,000, split four ways). The bamboo path starts at Tenryu-ji's north gate.",
+     "price": "¥500",
+     "pic": "bamboo"
+    },
+    {
+     "when": "5:00 PM",
+     "name": "Back to Osaka",
+     "map": "Saga-Arashiyama Station",
+     "about": "JR trains are the quickest way back from western Kyoto.",
+     "how": "Walk 10 min to JR Saga-Arashiyama Station. Sagano line to Kyoto (~15 min), JR Special Rapid to Osaka (~30 min), then Midosuji line to Namba (~10 min).",
+     "price": "~¥1,100",
+     "pic": ""
+    }
+   ],
+   "cost": {
+    "entry": [
+     [
+      "Kiyomizu-dera",
+      500
+     ],
+     [
+      "Tenryu-ji garden",
+      500
+     ]
+    ],
+    "train": [
+     [
+      "Subway + Keihan to Fushimi-Inari",
+      700
+     ],
+     [
+      "Keihan to Kiyomizu-Gojo",
+      200
+     ],
+     [
+      "Taxi up to Kiyomizu (split 4)",
+      300
+     ],
+     [
+      "Taxi to Arashiyama (split 4)",
+      1000
+     ],
+     [
+      "JR back to Osaka",
+      1100
+     ]
+    ],
+    "food": [
+     [
+      "Breakfast",
+      800
+     ],
+     [
+      "Lunch on Ninenzaka",
+      2000
+     ],
+     [
+      "Matcha and snacks",
+      800
+     ],
+     [
+      "Dinner",
+      2500
+     ]
+    ]
+   }
+  },
+  {
+   "d": "Sat Nov 14",
+   "short": "Nov 14",
+   "city": "nara",
+   "t": "Nara day tour, then shinkansen to Tokyo",
+   "note": "Night before: hand your big suitcases to the Osaka hotel front desk for delivery to the Tokyo hotel, so today you only carry day bags.",
+   "stops": [
+    {
+     "when": "8:00 AM",
+     "name": "Kintetsu line to Nara",
+     "map": "Kintetsu-Nara Station",
+     "about": "Kintetsu is the direct private railway between Osaka-Namba and central Nara, with trains about every 10 minutes.",
+     "how": "Check out. From Kintetsu Osaka-Namba Station (underground), take a Rapid Express or Express to Kintetsu-Nara, the last stop (~40 min). Coin lockers are by the ticket gates (~¥400–700).",
+     "price": "~¥700",
+     "pic": ""
+    },
+    {
+     "when": "9:00 AM",
+     "name": "Todai-ji Great Buddha",
+     "map": "Todaiji Temple Nara",
+     "about": "Founded in 752. Its Great Buddha Hall is one of the world's largest wooden buildings and holds a 15 m bronze Buddha. Look for the pillar with a hole: squeezing through is said to bring enlightenment.",
+     "how": "From Kintetsu-Nara, walk about 20 min east along Noborioji street into Nara Park, or take a short taxi.",
+     "price": "¥800",
+     "pic": "buddha"
+    },
+    {
+     "when": "10:30 AM",
+     "name": "Nara Park deer",
+     "map": "Nara Park",
+     "about": "A big park where about 1,300 wild sika deer roam freely. They're seen as messengers of the gods, and many bow for crackers. Keep maps and paper away from them.",
+     "how": "The park surrounds Todai-ji. Vendors along the paths sell shika senbei (deer crackers).",
+     "price": "~¥200",
+     "pic": "deer"
+    },
+    {
+     "when": "11:30 AM",
+     "name": "Kasuga Taisha",
+     "map": "Kasuga Taisha",
+     "about": "Nara's most important Shinto shrine, founded in 768, famous for its 3,000 stone and bronze lanterns along the forest path and inside the vermilion halls.",
+     "how": "From Todai-ji, walk 15–20 min southeast through the park on the lantern-lined path. Afterwards, walk back toward Kintetsu-Nara (~25 min) for lunch near the station.",
+     "price": "¥500",
+     "pic": "lanterns"
+    },
+    {
+     "when": "2:00 PM",
+     "name": "Kintetsu line to Kyoto Station",
+     "map": "Kyoto Station",
+     "about": "Kintetsu's Kyoto line runs from Nara straight into Kyoto Station, where the shinkansen leaves.",
+     "how": "Collect bags. From Kintetsu-Nara, take a train to Kyoto (some need a change at Yamato-Saidaiji), about 45 min. At Kyoto Station, follow the signs to the Shinkansen gates.",
+     "price": "~¥760",
+     "pic": ""
+    },
+    {
+     "when": "3:00 PM",
+     "name": "Shinkansen to Tokyo",
+     "map": "Kyoto Station Shinkansen",
+     "about": "Japan's bullet train. The Nozomi is the fastest service, about 2h15 to Tokyo. On a clear day Mt Fuji appears around the halfway point on the E-seat side.",
+     "how": "Enter the Shinkansen gates with your reserved tickets and board a Tokyo-bound Nozomi. Get off at Tokyo Station, then JR Chuo line to Shinjuku (~15 min) or JR Yamanote to Shibuya, depending on the hotel. Grab an ekiben (train bento) before boarding.",
+     "price": "~¥14,170",
+     "pic": "shinkansen"
+    },
+    {
+     "when": "Evening",
+     "name": "Check in, dinner near the hotel",
+     "map": "",
+     "about": "Your suitcases should be waiting at the front desk.",
+     "how": "A short walk from the hotel.",
+     "price": "",
+     "pic": ""
+    }
+   ],
+   "cost": {
+    "entry": [
+     [
+      "Todai-ji Great Buddha Hall",
+      800
+     ],
+     [
+      "Deer crackers",
+      200
+     ],
+     [
+      "Kasuga Taisha inner area",
+      500
+     ]
+    ],
+    "train": [
+     [
+      "Kintetsu, Namba to Nara",
+      700
+     ],
+     [
+      "Coin locker (shared)",
+      200
+     ],
+     [
+      "Kintetsu, Nara to Kyoto",
+      760
+     ],
+     [
+      "Shinkansen, Kyoto to Tokyo (reserved)",
+      14170
+     ]
+    ],
+    "food": [
+     [
+      "Breakfast",
+      800
+     ],
+     [
+      "Lunch in Nara",
+      1500
+     ],
+     [
+      "Ekiben on the train",
+      1500
+     ],
+     [
+      "Light dinner",
+      2000
+     ]
+    ]
+   }
+  },
+  {
+   "d": "Sun Nov 15",
+   "short": "Nov 15",
+   "city": "tokyo",
+   "t": "Shinjuku day",
+   "note": "",
+   "stops": [
+    {
+     "when": "10:30 AM",
+     "name": "Shinjuku Gyoen",
+     "map": "Shinjuku Gyoen",
+     "about": "A former imperial garden mixing Japanese, English and French styles. In mid-November its ginkgo and maple trees start to turn yellow and red.",
+     "how": "Walk about 10 min from Shinjuku Station's south exit to the Shinjuku Gate, or Marunouchi line to Shinjuku-gyoemmae.",
+     "price": "~¥500",
+     "pic": "garden"
+    },
+    {
+     "when": "2:00 PM",
+     "name": "Tokyo Metropolitan Government Building",
+     "map": "Tokyo Metropolitan Government Building observatory",
+     "about": "Tokyo's city hall. Its 45th-floor observatory is free and on clear days shows Mt Fuji. Afterwards, shop around Shinjuku Station.",
+     "how": "From Shinjuku Station's west exit, walk about 10 min west through the underground passage, or take the Oedo line to Tochomae.",
+     "price": "Free",
+     "pic": "tmg"
+    },
+    {
+     "when": "Dinner",
+     "name": "Omoide Yokocho",
+     "map": "Omoide Yokocho Shinjuku",
+     "about": "\"Memory Lane\", a narrow post-war alley of tiny smoky bars grilling yakitori. Each seats 6–10, so the group may need to try a few doors.",
+     "how": "Right outside Shinjuku Station's west exit, along the train tracks, about 2 min walk.",
+     "price": "",
+     "pic": "alley"
+    }
+   ],
+   "cost": {
+    "entry": [
+     [
+      "Shinjuku Gyoen",
+      500
+     ]
+    ],
+    "train": [
+     [
+      "Tokyo Metro / JR rides",
+      400
+     ]
+    ],
+    "food": [
+     [
+      "Breakfast",
+      800
+     ],
+     [
+      "Lunch",
+      1500
+     ],
+     [
+      "Yakitori at Omoide Yokocho",
+      3500
+     ]
+    ]
+   }
+  },
+  {
+   "d": "Mon Nov 16",
+   "short": "Nov 16",
+   "city": "tokyo",
+   "t": "Asakusa and teamLab",
+   "note": "",
+   "stops": [
+    {
+     "when": "9:00 AM",
+     "name": "Senso-ji and Nakamise",
+     "map": "Sensoji Temple Asakusa",
+     "about": "Tokyo's oldest temple, founded in 628. Enter through Kaminarimon, the Thunder Gate with its giant red lantern, then walk Nakamise, a 250 m street of snack and souvenir stalls.",
+     "how": "From Shinjuku, JR Chuo line to Kanda, then Ginza line to Asakusa (exit 1), about 35 min. The gate is a 1-min walk.",
+     "price": "Free",
+     "pic": "sensoji"
+    },
+    {
+     "when": "Midday",
+     "name": "Sumida River walk",
+     "map": "Sumida Park Tokyo",
+     "about": "A riverside park beside Asakusa with a clear view of Tokyo Skytree, the 634 m broadcast tower. Have lunch in Asakusa first.",
+     "how": "Walk 5 min east from Senso-ji to the river and Sumida Park.",
+     "price": "Free",
+     "pic": "river"
+    },
+    {
+     "when": "2:30 PM",
+     "name": "teamLab Planets",
+     "map": "teamLab Planets Toyosu",
+     "about": "An immersive digital art museum where you walk barefoot through knee-deep water, a garden of floating flowers and infinite mirror rooms. Takes 60–90 min; wear shorts or roll-up pants.",
+     "how": "From Asakusa, Ginza line to Shimbashi, then the Yurikamome line to Shin-Toyosu (~40 min total). The entrance is a 1-min walk.",
+     "price": "¥3,600–4,200",
+     "pic": "teamlab"
+    }
+   ],
+   "cost": {
+    "entry": [
+     [
+      "teamLab Planets (date-based, ¥3,600–4,200)",
+      3800
+     ]
+    ],
+    "train": [
+     [
+      "Metro to Asakusa",
+      200
+     ],
+     [
+      "Asakusa to Shin-Toyosu",
+      500
+     ],
+     [
+      "Back to the hotel",
+      400
+     ]
+    ],
+    "food": [
+     [
+      "Breakfast",
+      800
+     ],
+     [
+      "Lunch in Asakusa",
+      1500
+     ],
+     [
+      "Nakamise snacks",
+      800
+     ],
+     [
+      "Dinner",
+      2500
+     ]
+    ]
+   }
+  },
+  {
+   "d": "Tue Nov 17",
+   "short": "Nov 17",
+   "city": "tokyo",
+   "t": "Mt Takao autumn leaves",
+   "note": "",
+   "stops": [
+    {
+     "when": "9:00 AM",
+     "name": "Keio line to Takaosanguchi",
+     "map": "Takaosanguchi Station",
+     "about": "Keio is a private railway from Shinjuku to the hills west of Tokyo.",
+     "how": "At Shinjuku Station, follow the Keio line signs. Take a Semi-Special or Special Express toward Takaosanguchi (some need a change at Kitano), about 50 min.",
+     "price": "~¥500 each way",
+     "pic": ""
+    },
+    {
+     "when": "10:00 AM",
+     "name": "Mt Takao",
+     "map": "Mount Takao",
+     "about": "A 599 m mountain on the edge of Tokyo with a cable car, the mountain temple Yakuo-in and summit views toward Mt Fuji. One of Tokyo's best autumn-leaf spots, usually peaking Nov 6–20.",
+     "how": "From Takaosanguchi Station, walk 5 min to Kiyotaki cable car station; ride up 6 min. Then follow Trail 1 (paved) about 40 min to the summit via Yakuo-in.",
+     "price": "~¥500 each way",
+     "pic": "mountain"
+    },
+    {
+     "when": "Lunch",
+     "name": "Soba on the mountain",
+     "map": "",
+     "about": "Takao is known for tororo soba: buckwheat noodles with grated mountain yam.",
+     "how": "Restaurants line Trail 1 and the foot of the mountain. Then take the cable car down and the Keio line back to Shinjuku by mid-afternoon.",
+     "price": "",
+     "pic": "soba"
+    }
+   ],
+   "cost": {
+    "entry": [
+     [
+      "Mt Takao cable car, round trip",
+      1000
+     ]
+    ],
+    "train": [
+     [
+      "Keio line, Shinjuku to Takao and back",
+      1000
+     ]
+    ],
+    "food": [
+     [
+      "Breakfast",
+      800
+     ],
+     [
+      "Soba lunch on the mountain",
+      1500
+     ],
+     [
+      "Dinner",
+      2500
+     ]
+    ]
+   }
+  },
+  {
+   "d": "Wed Nov 18",
+   "short": "Nov 18",
+   "city": "tokyo",
+   "t": "Harajuku, Shibuya and the view",
+   "note": "",
+   "stops": [
+    {
+     "when": "9:30 AM",
+     "name": "Meiji Jingu",
+     "map": "Meiji Jingu",
+     "about": "A Shinto shrine to Emperor Meiji inside a 70-hectare forest, entered through giant wooden torii gates. Afterwards: Takeshita Street for youth fashion and crepes, then Omotesando, Tokyo's designer avenue.",
+     "how": "JR Yamanote line from Shinjuku to Harajuku (~5 min). The shrine gate is right outside the station; Takeshita Street is across the road.",
+     "price": "Free",
+     "pic": "meiji"
+    },
+    {
+     "when": "1:30 PM",
+     "name": "Shibuya Crossing and Hachiko",
+     "map": "Shibuya Scramble Crossing",
+     "about": "The world's busiest pedestrian scramble, where up to about 3,000 people cross at once. Hachiko is the statue of the loyal dog who waited at the station for his owner for 9 years.",
+     "how": "Walk 15–20 min from Omotesando down Meiji-dori, or JR Yamanote one stop to Shibuya. Use the Hachiko exit.",
+     "price": "Free",
+     "pic": "crossing"
+    },
+    {
+     "when": "~4:00 PM",
+     "name": "Shibuya Sky",
+     "map": "Shibuya Sky",
+     "about": "An open-air rooftop deck 229 m up on Shibuya Scramble Square, with 360° views and a straight-down look at the crossing. Time it for sunset.",
+     "how": "Shibuya Scramble Square is connected to Shibuya Station; go to the 14th floor for entry. Loose items like hats and bags go in the free lockers before the rooftop.",
+     "price": "¥3,400",
+     "pic": "rooftop"
+    }
+   ],
+   "cost": {
+    "entry": [
+     [
+      "Shibuya Sky (from 15:00, online)",
+      3400
+     ]
+    ],
+    "train": [
+     [
+      "JR / Metro rides",
+      500
+     ]
+    ],
+    "food": [
+     [
+      "Breakfast",
+      800
+     ],
+     [
+      "Takeshita Street crepe",
+      800
+     ],
+     [
+      "Lunch",
+      1500
+     ],
+     [
+      "Dinner in Shibuya",
+      2500
+     ]
+    ]
+   }
+  },
+  {
+   "d": "Thu Nov 19",
+   "short": "Nov 19",
+   "city": "tokyo",
+   "t": "Free day and farewell dinner",
+   "note": "",
+   "stops": [
+    {
+     "when": "Day",
+     "name": "Pick one, or split up",
+     "map": "",
+     "about": "Ameyoko is a lively market street under the train tracks by Ueno Park. Ginza is the upscale shopping district with department-store food halls. Tokyo Station Character Street has shops for Pokémon, Ghibli and other anime.",
+     "how": "Ameyoko: JR Yamanote line to Ueno or Okachimachi. Ginza: Marunouchi line to Ginza. Character Street: Tokyo Station's Yaesu underground mall.",
+     "price": "",
+     "pic": "market"
+    },
+    {
+     "when": "Evening",
+     "name": "Farewell dinner",
+     "map": "",
+     "about": "Last night together: a good night for wagyu, sushi or an izakaya.",
+     "how": "Pick somewhere near the hotel so packing is easy.",
+     "price": "",
+     "pic": "dinner"
+    }
+   ],
+   "cost": {
+    "entry": [],
+    "train": [
+     [
+      "Metro rides around town",
+      600
+     ]
+    ],
+    "food": [
+     [
+      "Breakfast",
+      800
+     ],
+     [
+      "Lunch",
+      1500
+     ],
+     [
+      "Farewell dinner",
+      5000
+     ]
+    ]
+   }
+  },
+  {
+   "d": "Fri Nov 20",
+   "short": "Nov 20",
+   "city": "tokyo",
+   "t": "Departure, no activities",
+   "note": "",
+   "stops": [
+    {
+     "when": "Morning",
+     "name": "Check out and head to the airport",
+     "map": "",
+     "about": "International flights need about 3 hours at the airport for check-in and security.",
+     "how": "Check which airport your flight uses: Haneda (closer) or Narita (farther).",
+     "price": "",
+     "pic": "plane"
+    },
+    {
+     "when": "If Haneda",
+     "name": "Keikyu line or monorail",
+     "map": "Haneda Airport",
+     "about": "Haneda is Tokyo's closer airport, about 30–45 min from the city.",
+     "how": "Keikyu line from Shinagawa, or the Tokyo Monorail from Hamamatsucho.",
+     "price": "¥500–700",
+     "pic": ""
+    },
+    {
+     "when": "If Narita",
+     "name": "Narita Express",
+     "map": "Narita Airport",
+     "about": "Narita is the larger, farther airport. The Narita Express has reserved seats and luggage space.",
+     "how": "From Shinjuku or Tokyo Station, about 60–90 min.",
+     "price": "¥3,000–3,300",
+     "pic": ""
+    }
+   ],
+   "cost": {
+    "entry": [],
+    "train": [
+     [
+      "To Haneda (Narita: about ¥3,200)",
+      600
+     ]
+    ],
+    "food": [
+     [
+      "Breakfast",
+      800
+     ],
+     [
+      "Lunch at the airport",
+      1500
+     ]
+    ]
+   }
+  }
+ ],
+ "todo": [
+  [
+   "Hotels",
+   "Osaka Nov 11–14 (3 nights) and Tokyo Nov 14–20 (6 nights). Book now; mid-November is busy."
+  ],
+  [
+   "Shinkansen, Nov 14",
+   "Kyoto to Tokyo, mid-afternoon. smartEX app or the station. Seats D and E together."
+  ],
+  [
+   "Suitcase forwarding",
+   "Hand bags to the Osaka hotel front desk on the evening of Nov 13."
+  ],
+  [
+   "teamLab Planets, Nov 16",
+   "Timed tickets; book 2–3 weeks ahead."
+  ],
+  [
+   "Shibuya Sky, Nov 18",
+   "~4:00 PM slot. Sales open about 2 weeks before (around Nov 4). Klook accepts foreign cards."
+  ],
+  [
+   "Visit Japan Web",
+   "Register before flying for faster immigration and customs."
+  ],
+  [
+   "Rapi:t ticket (optional)",
+   "Nov 11 digital ticket is a little cheaper online."
+  ]
+ ]
+};
+const M = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+const CITY = {
+  osaka:{c:"var(--osaka)",k:"大阪",n:"Osaka"}, kyoto:{c:"var(--kyoto)",k:"京都",n:"Kyoto"},
+  nara:{c:"var(--nara)",k:"奈良",n:"Nara"}, tokyo:{c:"var(--tokyo)",k:"東京",n:"Tokyo"}
+};
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+const clone = o => JSON.parse(JSON.stringify(o));
+const $ = id => document.getElementById(id);
+
+// Hand-drawn style illustrations for each stop (inline SVG, no external images)
+const sky=(k,a,b)=>`<defs><linearGradient id="s_${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="360" height="150" fill="url(#s_${k})"/>`;
+const torii=(x,y,w,c)=>{const h=w*.9;return `<g fill="${c}"><rect x="${x}" y="${y}" width="${w*.1}" height="${h}"/><rect x="${x+w*.8}" y="${y}" width="${w*.1}" height="${h}"/><rect x="${x-w*.12}" y="${y-w*.06}" width="${w*1.14}" height="${w*.1}" rx="${w*.03}"/><rect x="${x-w*.02}" y="${y+w*.14}" width="${w*.94}" height="${w*.07}"/></g>`};
+const tree=(x,y,r,c)=>`<rect x="${x-2}" y="${y}" width="4" height="${r*1.4}" fill="#6B4A2B"/><circle cx="${x}" cy="${y}" r="${r}" fill="${c}"/>`;
+const SCN={
+plane:()=>sky("pl","#8FC3EC","#E8F3FC")+`<g fill="#fff" opacity=".95"><ellipse cx="70" cy="118" rx="70" ry="18"/><ellipse cx="300" cy="125" rx="90" ry="20"/><ellipse cx="190" cy="140" rx="80" ry="16"/></g><g transform="rotate(-12 190 70)"><rect x="110" y="62" width="170" height="20" rx="10" fill="#F4F6F8"/><polygon points="170,70 215,70 175,30 160,30" fill="#C9D3DE"/><polygon points="170,74 215,74 180,112 165,112" fill="#B5C1CE"/><polygon points="115,66 135,66 120,42 108,42" fill="#1C61C4"/><rect x="150" y="68" width="110" height="4" fill="#1C61C4"/><circle cx="268" cy="70" r="3" fill="#18202E"/></g>`,
+train:()=>sky("tr","#5E7FB8","#F3C7A0")+`<rect y="112" width="360" height="10" fill="#4A4F5C"/><rect y="122" width="360" height="28" fill="#6C7280"/><g><path d="M40 70 h230 q50 0 60 40 h-290 z" fill="#2E4E9E"/><rect x="40" y="96" width="290" height="6" fill="#E9EEF7"/>${[70,105,140,175,210,245].map(x=>`<circle cx="${x}" cy="84" r="8" fill="#BFD6F5" stroke="#E9EEF7" stroke-width="2"/>`).join("")}<rect x="60" y="106" width="250" height="6" fill="#1D2F63"/></g>`,
+dotonbori:()=>sky("dt","#151A36","#3B2A5C")+`${[[0,30,60],[60,15,50],[110,40,70],[180,10,55],[235,35,60],[295,20,65]].map(([x,y,w])=>`<rect x="${x}" y="${y}" width="${w}" height="${110-y}" fill="#232846"/>`).join("")}<rect x="20" y="45" width="30" height="20" fill="#FF4FA3"/><rect x="72" y="28" width="26" height="40" fill="#FFD447"/><rect x="125" y="55" width="40" height="18" fill="#3FE0F0"/><rect x="190" y="25" width="34" height="34" fill="#FF6A3D"/><circle cx="207" cy="42" r="10" fill="#fff"/><rect x="248" y="50" width="34" height="16" fill="#9AF04F"/><rect x="305" y="35" width="40" height="22" fill="#FF4FA3"/><rect y="110" width="360" height="40" fill="#1E3A73"/><g stroke-width="3" opacity=".7"><line x1="25" y1="120" x2="45" y2="120" stroke="#FF4FA3"/><line x1="75" y1="126" x2="95" y2="126" stroke="#FFD447"/><line x1="195" y1="122" x2="220" y2="122" stroke="#FF6A3D"/><line x1="130" y1="134" x2="160" y2="134" stroke="#3FE0F0"/></g>`,
+castle:()=>sky("cs","#86C2EE","#DDEFFB")+`${tree(30,110,22,"#D9622B")}${tree(330,108,24,"#E9A23B")}${tree(60,118,16,"#C84A2A")}<rect y="125" width="360" height="25" fill="#7FA36B"/><polygon points="110,128 250,128 238,98 122,98" fill="#8B909A"/><rect x="140" y="78" width="80" height="22" fill="#F6F6F2"/><polygon points="128,80 232,80 214,68 146,68" fill="#2F6B5D"/><rect x="152" y="54" width="56" height="16" fill="#F6F6F2"/><polygon points="142,56 218,56 202,44 158,44" fill="#2F6B5D"/><rect x="162" y="32" width="36" height="14" fill="#F6F6F2"/><polygon points="154,34 206,34 194,20 166,20" fill="#2F6B5D"/><rect x="164" y="14" width="5" height="8" fill="#E2B33A"/><rect x="191" y="14" width="5" height="8" fill="#E2B33A"/>${[150,170,190,210].map(x=>`<rect x="${x}" y="84" width="6" height="8" fill="#2F6B5D"/>`).join("")}`,
+shinsekai:()=>sky("sh","#F2A65A","#5B3A7A")+`<rect y="110" width="360" height="40" fill="#2C2440"/><rect x="0" y="80" width="130" height="40" fill="#3A2F52"/><rect x="230" y="75" width="130" height="45" fill="#3A2F52"/><rect x="168" y="30" width="24" height="90" fill="#C9CED6"/><path d="M160 120 l20 -60 l20 60" fill="none" stroke="#AEB4BE" stroke-width="4"/><rect x="156" y="18" width="48" height="18" rx="3" fill="#E7EAEE"/><rect x="174" y="6" width="12" height="14" fill="#E7EAEE"/><rect x="20" y="88" width="40" height="14" fill="#FFD447"/><rect x="70" y="92" width="44" height="12" fill="#FF4FA3"/><rect x="245" y="84" width="50" height="16" fill="#3FE0F0"/><rect x="305" y="90" width="40" height="12" fill="#FF6A3D"/><circle cx="60" cy="130" r="5" fill="#FF6A3D"/><circle cx="300" cy="130" r="5" fill="#FFD447"/>`,
+umeda:()=>sky("um","#FF8A4C","#FFD7A3")+`<circle cx="70" cy="95" r="26" fill="#FFF2C8" opacity=".85"/><rect y="118" width="360" height="32" fill="#5B5466"/><rect x="0" y="100" width="90" height="20" fill="#6D6578"/><rect x="270" y="95" width="90" height="25" fill="#6D6578"/><rect x="140" y="22" width="34" height="98" fill="#9DA7B6"/><rect x="200" y="22" width="34" height="98" fill="#9DA7B6"/><rect x="134" y="16" width="106" height="16" fill="#B9C2CE"/><circle cx="187" cy="38" r="14" fill="none" stroke="#B9C2CE" stroke-width="6"/>${[40,55,70,85,100].map(y=>`<rect x="146" y="${y}" width="22" height="5" fill="#C9D6E6"/><rect x="206" y="${y}" width="22" height="5" fill="#C9D6E6"/>`).join("")}`,
+torii:()=>sky("to","#2B5236","#3F7048")+`<polygon points="150,150 210,150 192,60 168,60" fill="#C9B48A"/><rect x="150" y="60" width="60" height="90" fill="#1E3A26" opacity=".5"/>${[[164,70,32,"#8E2A12"],[156,64,48,"#A93415"],[146,56,68,"#C43D18"],[132,46,96,"#D9441B"],[112,34,136,"#E8501F"]].map(([x,y,w,c])=>torii(x,y,w,c)).join("")}<rect x="0" y="0" width="70" height="150" fill="#24452D" opacity=".6"/><rect x="290" y="0" width="70" height="150" fill="#24452D" opacity=".6"/>`,
+kiyomizu:()=>sky("ky","#9DCCEF","#E3F1FB")+`<path d="M0 90 Q120 60 360 80 V150 H0 Z" fill="#6E8F4E"/>${tree(40,88,20,"#D9622B")}${tree(80,96,18,"#E9A23B")}${tree(300,90,22,"#C84A2A")}${tree(335,100,16,"#E07A2C")}<g stroke="#7A4E2D" stroke-width="3">${[130,150,170,190,210,230].map(x=>`<line x1="${x}" y1="80" x2="${x}" y2="140"/>`).join("")}${[96,112,128].map(y=>`<line x1="128" y1="${y}" x2="232" y2="${y}"/>`).join("")}</g><rect x="120" y="74" width="120" height="8" fill="#8A5A34"/><rect x="138" y="52" width="84" height="22" fill="#B0703C"/><polygon points="112,56 248,56 216,30 144,30" fill="#4A4038"/>`,
+bamboo:()=>sky("bb","#CFE8B8","#8DBB6A")+`${Array.from({length:22},(_,i)=>{const x=i*17-4+((i*37)%9);const w=8+(i%3)*3;const c=["#3E7D3A","#5C9E45","#2F6630","#76B055"][i%4];return `<rect x="${x}" y="0" width="${w}" height="150" fill="${c}"/>${[30,70,110].map(y=>`<rect x="${x}" y="${y+(i%4)*4}" width="${w}" height="2" fill="#24502A" opacity=".6"/>`).join("")}`}).join("")}<polygon points="140,150 220,150 190,80 170,80" fill="#D8C9A0"/>`,
+buddha:()=>sky("bu","#9CCBEF","#E5F2FC")+`<rect y="122" width="360" height="28" fill="#C9B48A"/><rect x="80" y="70" width="200" height="54" fill="#8C5A35"/>${[100,130,160,190,220,250].map(x=>`<rect x="${x}" y="80" width="14" height="44" fill="#6E4428"/>`).join("")}<rect x="150" y="56" width="60" height="14" fill="#F2E7D0"/><polygon points="50,74 310,74 280,48 80,48" fill="#3E3A38"/><polygon points="90,48 270,48 250,24 110,24" fill="#3E3A38"/><path d="M106 26 q-8 -12 -2 -18" stroke="#E2B33A" stroke-width="5" fill="none"/><path d="M254 26 q8 -12 2 -18" stroke="#E2B33A" stroke-width="5" fill="none"/>`,
+deer:()=>sky("de","#A7D3F2","#E8F4FC")+`<rect y="105" width="360" height="45" fill="#8DB36A"/>${tree(50,80,30,"#E2A23A")}${tree(310,78,32,"#D9622B")}<g fill="#B57E4E"><ellipse cx="180" cy="100" rx="42" ry="18"/><rect x="150" y="110" width="6" height="30"/><rect x="164" y="112" width="6" height="28"/><rect x="194" y="112" width="6" height="28"/><rect x="208" y="110" width="6" height="30"/><path d="M212 92 l18 -26 l10 6 l-14 26 z"/><ellipse cx="238" cy="66" rx="14" ry="9"/></g><ellipse cx="250" cy="68" rx="4" ry="3" fill="#3A2A20"/><path d="M232 58 l-6 -16 M238 58 l2 -16" stroke="#8A6040" stroke-width="3"/><g fill="#F3E6D2">${[[165,94],[180,90],[195,96],[172,104],[188,104]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3"/>`).join("")}</g><circle cx="244" cy="64" r="1.8" fill="#18202E"/>`,
+lanterns:()=>sky("la","#2D5838","#4C7D55")+`<polygon points="120,150 240,150 200,60 160,60" fill="#BFAE8A"/>${torii(150,22,60,"#E24A1E")}${[[60,70,1],[92,80,.8],[268,80,.8],[300,70,1]].map(([x,y,s])=>`<g transform="translate(${x} ${y}) scale(${s})"><rect x="-12" y="40" width="24" height="10" fill="#8F969E"/><rect x="-5" y="18" width="10" height="24" fill="#A3AAB2"/><rect x="-12" y="4" width="24" height="16" fill="#B5BCC4"/><rect x="-6" y="8" width="12" height="8" fill="#FFE29A"/><polygon points="-18,6 18,6 0,-8" fill="#8F969E"/></g>`).join("")}`,
+shinkansen:()=>sky("sk","#8DC2EE","#E4F1FB")+`<polygon points="40,110 150,30 260,110" fill="#5D7FA6"/><polygon points="122,50 150,30 178,50 165,56 150,46 135,56" fill="#fff"/><rect y="110" width="360" height="40" fill="#8FAE74"/><rect y="118" width="360" height="6" fill="#4A4F5C"/><path d="M10 90 h250 q70 2 95 24 h-345 z" fill="#F7F8FA"/><rect x="10" y="104" width="330" height="5" fill="#1C61C4"/>${[30,60,90,120,150,180,210].map(x=>`<rect x="${x}" y="94" width="18" height="7" rx="2" fill="#3A4A66"/>`).join("")}<path d="M260 95 q40 4 60 14 h-40 z" fill="#3A4A66"/>`,
+garden:()=>sky("ga","#A8D4F2","#E8F4FC")+`${[[0,60,40],[45,40,30],[80,70,50],[260,45,40],[300,30,30],[330,55,30]].map(([x,y,w])=>`<rect x="${x}" y="${y}" width="${w}" height="${80-y+20}" fill="#B9C6D3"/>`).join("")}<rect y="95" width="360" height="55" fill="#7FA45F"/><ellipse cx="190" cy="125" rx="110" ry="16" fill="#6FA8D6"/>${tree(70,92,26,"#F2C230")}${tree(130,86,22,"#E8B21E")}${tree(260,90,28,"#F2C230")}${tree(320,96,18,"#D9622B")}`,
+tmg:()=>sky("tm","#7FB5E6","#DCEEFB")+`<rect y="120" width="360" height="30" fill="#5B6474"/>${[[10,80,40],[60,95,30],[260,85,40],[310,70,40]].map(([x,y,w])=>`<rect x="${x}" y="${y}" width="${w}" height="${120-y}" fill="#8E9AAA"/>`).join("")}<rect x="120" y="40" width="120" height="80" fill="#AEB8C6"/><rect x="128" y="14" width="44" height="30" fill="#BFC8D4"/><rect x="188" y="14" width="44" height="30" fill="#BFC8D4"/><rect x="138" y="4" width="24" height="12" fill="#CCD4DE"/><rect x="198" y="4" width="24" height="12" fill="#CCD4DE"/>${[50,62,74,86,98,110].map(y=>`<rect x="128" y="${y}" width="104" height="3" fill="#8E9AAA"/>`).join("")}`,
+alley:()=>sky("al","#17142A","#2C2140")+`<polygon points="0,0 120,0 150,150 0,150" fill="#3A2B2B"/><polygon points="360,0 240,0 210,150 360,150" fill="#3A2B2B"/><polygon points="150,150 210,150 190,40 170,40" fill="#4E4038"/>${[[110,30],[128,58],[140,84],[250,30],[232,58],[220,84]].map(([x,y])=>`<line x1="${x}" y1="${y-14}" x2="${x}" y2="${y-8}" stroke="#888" stroke-width="2"/><ellipse cx="${x}" cy="${y}" rx="10" ry="12" fill="#E5402A"/><rect x="${x-10}" y="${y-2}" width="20" height="3" fill="#18202E" opacity=".4"/>`).join("")}<rect x="20" y="90" width="80" height="40" fill="#F2C76B" opacity=".5"/><rect x="260" y="90" width="80" height="40" fill="#F2C76B" opacity=".5"/>`,
+sensoji:()=>sky("se","#9CCBEF","#E5F2FC")+`<rect y="128" width="360" height="22" fill="#C9C2B4"/><rect x="70" y="40" width="20" height="90" fill="#C8341C"/><rect x="270" y="40" width="20" height="90" fill="#C8341C"/><rect x="60" y="36" width="240" height="14" fill="#C8341C"/><polygon points="40,40 320,40 290,14 70,14" fill="#3E3A38"/><ellipse cx="180" cy="88" rx="38" ry="40" fill="#D9341E"/><rect x="146" y="50" width="68" height="8" fill="#2A2A2A"/><rect x="146" y="118" width="68" height="8" fill="#2A2A2A"/><rect x="166" y="70" width="28" height="36" fill="#2A2A2A" opacity=".55"/>`,
+river:()=>sky("ri","#A2D0F1","#E6F3FC")+`<rect x="268" y="10" width="8" height="100" fill="#C3CBD6"/><rect x="262" y="40" width="20" height="8" fill="#D9DFE7"/><rect x="265" y="62" width="14" height="5" fill="#D9DFE7"/><path d="M270 10 l2 -10 l2 10" fill="#C3CBD6"/><rect y="100" width="360" height="12" fill="#8FAE74"/><rect y="112" width="360" height="38" fill="#4E86C2"/><g stroke="#BFDAF2" stroke-width="2" opacity=".8"><line x1="30" y1="125" x2="70" y2="125"/><line x1="140" y1="135" x2="190" y2="135"/><line x1="240" y1="122" x2="300" y2="122"/></g>${tree(40,90,14,"#E9A23B")}${tree(100,92,12,"#D9622B")}${tree(170,90,14,"#E9A23B")}`,
+teamlab:()=>sky("tl","#0E0F24","#1D1440")+`${[[60,50,26,"#FF4FA3"],[130,80,34,"#3FE0F0"],[210,45,22,"#FFD447"],[280,85,30,"#9AF04F"],[330,40,18,"#B07CFF"],[30,100,16,"#FF6A3D"],[180,110,14,"#FF4FA3"]].map(([x,y,r,c])=>`<circle cx="${x}" cy="${y}" r="${r*1.8}" fill="${c}" opacity=".15"/><circle cx="${x}" cy="${y}" r="${r}" fill="${c}" opacity=".85"/>`).join("")}<rect y="122" width="360" height="28" fill="#2A3A7A" opacity=".7"/>`,
+mountain:()=>sky("mt","#9FD0F2","#E6F3FC")+`<polygon points="0,150 0,90 90,40 170,85 240,35 360,95 360,150" fill="#5E7A4A"/>${[[30,96],[60,80],[90,64],[120,74],[200,70],[230,52],[260,62],[300,80],[330,92],[150,100],[190,110]].map(([x,y],i)=>`<circle cx="${x}" cy="${y}" r="${11+(i%3)*3}" fill="${["#D9622B","#E9A23B","#C8341C","#F2C230"][i%4]}"/>`).join("")}<line x1="40" y1="140" x2="230" y2="40" stroke="#3A3A3A" stroke-width="2"/><rect x="120" y="86" width="22" height="16" rx="3" fill="#F2F2F2" stroke="#1C61C4" stroke-width="2" transform="rotate(-28 131 94)"/>`,
+soba:()=>sky("sb","#E9D7BC","#C9A97C")+`<rect y="100" width="360" height="50" fill="#8A5A34"/><ellipse cx="180" cy="98" rx="80" ry="18" fill="#2A2A2A"/><path d="M100 98 q80 70 160 0" fill="#1F1F1F"/><ellipse cx="180" cy="96" rx="70" ry="13" fill="#7A5A3A"/>${[150,165,180,195,210].map(x=>`<path d="M${x-15} 92 q15 8 30 0" stroke="#C9B48A" stroke-width="3" fill="none"/>`).join("")}<line x1="230" y1="40" x2="300" y2="110" stroke="#B5864F" stroke-width="5"/><line x1="245" y1="35" x2="310" y2="104" stroke="#B5864F" stroke-width="5"/>`,
+meiji:()=>sky("mj","#1F4A2C","#3A6E45")+`<polygon points="130,150 230,150 200,70 160,70" fill="#C9B48A"/>${torii(100,40,160,"#7A5A3A")}<rect x="0" y="0" width="80" height="150" fill="#183A22" opacity=".7"/><rect x="280" y="0" width="80" height="150" fill="#183A22" opacity=".7"/>`,
+crossing:()=>sky("cr","#8FB6DB","#D7E7F5")+`<rect x="0" y="20" width="80" height="80" fill="#9AA4B2"/><rect x="10" y="30" width="60" height="30" fill="#3FE0F0" opacity=".7"/><rect x="280" y="10" width="80" height="90" fill="#9AA4B2"/><rect x="290" y="22" width="60" height="34" fill="#FF4FA3" opacity=".7"/><rect x="100" y="40" width="160" height="60" fill="#B6BFCB"/><rect y="98" width="360" height="52" fill="#4A4F5C"/>${Array.from({length:12},(_,i)=>`<rect x="${20+i*28}" y="104" width="14" height="40" fill="#F2F2F2" transform="skewX(-30)"/>`).join("")}${Array.from({length:30},(_,i)=>`<circle cx="${(i*47)%340+10}" cy="${108+(i*13)%34}" r="3" fill="${["#18202E","#D4461F","#1C61C4","#F2C230"][i%4]}"/>`).join("")}`,
+rooftop:()=>sky("rt","#3B3A7A","#FF9E5E")+`<circle cx="270" cy="96" r="20" fill="#FFD7A3"/>${Array.from({length:18},(_,i)=>{const h=20+((i*53)%50);return `<rect x="${i*20}" y="${118-h}" width="18" height="${h}" fill="#2D2A4A"/>`}).join("")}<rect y="118" width="360" height="32" fill="#1E1C33"/><rect x="0" y="104" width="360" height="3" fill="#E7EAEE" opacity=".8"/><rect x="0" y="90" width="360" height="30" fill="#E7EAEE" opacity=".12"/><rect x="186" y="78" width="4" height="28" fill="#F2F2F2"/>`,
+market:()=>sky("mk","#A8D4F2","#E8F4FC")+`<rect y="118" width="360" height="32" fill="#C9C2B4"/>${[0,90,180,270].map((x,i)=>`<rect x="${x+6}" y="70" width="78" height="48" fill="#E7DCC6"/>${Array.from({length:6},(_,k)=>`<rect x="${x+6+k*13}" y="54" width="13" height="18" fill="${k%2?"#fff":["#D4461F","#1C61C4","#2F8642","#E2B33A"][i]}"/>`).join("")}${[20,40,60].map(dx=>`<circle cx="${x+dx}" cy="104" r="7" fill="${["#E24A1E","#F2C230","#7FB24A"][(dx/20+i)%3]}"/>`).join("")}`).join("")}`,
+dinner:()=>sky("dn","#3A2A2A","#5A3E30")+`<rect y="70" width="360" height="80" fill="#8A5A34"/><ellipse cx="90" cy="105" rx="40" ry="14" fill="#F2EDE4"/><ellipse cx="90" cy="102" rx="26" ry="8" fill="#D9622B"/><ellipse cx="180" cy="100" rx="34" ry="12" fill="#2A2A2A"/><ellipse cx="180" cy="98" rx="24" ry="7" fill="#F2EDE4"/><ellipse cx="270" cy="106" rx="40" ry="14" fill="#F2EDE4"/>${[255,268,281].map(x=>`<rect x="${x}" y="96" width="10" height="8" rx="2" fill="#E2B33A"/>`).join("")}<rect x="150" y="40" width="10" height="26" fill="#E7EAEE" opacity=".9"/><rect x="200" y="44" width="10" height="22" fill="#E7EAEE" opacity=".9"/>`
+};
+
+const pic = s => (s.pic && SCN[s.pic]) ? `<svg class="pic" viewBox="0 0 360 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of ${esc(s.name)}">${SCN[s.pic]()}</svg>` : "";
+
+// ---------- State ----------
+let DATA = clone(DEFAULT);          // what is shown (may include unsaved edits)
+let SAVED = clone(DEFAULT);         // last version saved on the server
+let version = 0, meta = null;
+let online = false, editing = false, dirty = false;
+let cur = -1;                       // -1 = Before you go page
+const store = {
+  get(k){ try{ return localStorage.getItem(k) }catch(e){ return null } },
+  set(k,v){ try{ localStorage.setItem(k,v) }catch(e){} },
+  del(k){ try{ localStorage.removeItem(k) }catch(e){} }
+};
+
+// ---------- Costs ----------
+const RATE = 0.38;
+const yen = n => "¥" + Math.round(n).toLocaleString("en-US");
+const peso = n => "≈ ₱" + Math.round(n*RATE).toLocaleString("en-US");
+function costHTML(day){
+  const c = day.cost || {entry:[],train:[],food:[]};
+  const G = [["Entry tickets",c.entry||[],"var(--kyoto)"],["Trains and transport",c.train||[],"var(--tokyo)"],["Food (estimate)",c.food||[],"var(--osaka)"]];
+  const sums = G.map(g=>g[1].reduce((a,x)=>a+(+x[1]||0),0)), tot = sums.reduce((a,b)=>a+b,0);
+  const stack = tot ? G.map((g,k)=>sums[k]?`<span style="width:${sums[k]/tot*100}%;background:${g[2]}"></span>`:"").join("") : "";
+  const groups = G.map((g,k)=>`<div class="cgrp" style="--g:${g[2]}"><div class="gh"><span><i></i>${g[0]}</span><span>${yen(sums[k])}</span></div>${
+    g[1].length?`<ul>${g[1].map(x=>`<li><span>${esc(x[0])}</span><span>${yen(x[1])}</span></li>`).join("")}</ul>`:`<div class="none">None today</div>`}</div>`).join("");
+  return `<section class="cost" aria-label="Costs for this day"><h4>What this day costs</h4><p class="per">Per person, in yen. Hotels not included.</p>
+    <div class="stack" aria-hidden="true">${stack}</div>${groups}
+    <div class="ctot"><div><span>Per person</span><b>${yen(tot)}</b><em>${peso(tot)}</em></div><div><span>Group of 4</span><b>${yen(tot*4)}</b><em>${peso(tot*4)}</em></div></div></section>`;
+}
+
+
+// ---------- In-app maps and directions (OpenStreetMap, no key needed) ----------
+// Map: Leaflet + OpenStreetMap tiles. Place search: Photon (komoot), fallback Nominatim.
+// Routes: FOSSGIS OSRM servers (walking and driving). Photos: Google Street View Static API (optional key).
+// None of these give train routes in Japan, so trains use the written "How to get there" steps.
+let MAPCFG = {svKey:""}, leafletLoading = null, openDir = null, watchId = null;
+const CITY_LL = {osaka:[34.6937,135.5023], kyoto:[35.0116,135.7681], nara:[34.6851,135.8048], tokyo:[35.6812,139.7671]};
+async function loadConfig(){
+  try{ const r = await fetch("/api/config",{cache:"no-store"}); if(r.ok){ const j = await r.json(); MAPCFG.svKey = j.streetViewKey || ""; } }catch(e){}
+}
+function loadLeaflet(){
+  if(window.L) return Promise.resolve();
+  if(leafletLoading) return leafletLoading;
+  leafletLoading = new Promise((res,rej)=>{
+    const css = document.createElement("link"); css.rel="stylesheet";
+    css.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"; document.head.appendChild(css);
+    const s = document.createElement("script"); s.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
+    s.onload = ()=>res(); s.onerror = ()=>{ leafletLoading=null; rej(new Error("The map didn't load. Check your connection.")); };
+    document.head.appendChild(s);
+  });
+  return leafletLoading;
+}
+async function findPlace(q, city){
+  const ck = "jp26-osm:" + q, cached = store.get(ck);
+  if(cached){ try{ return JSON.parse(cached) }catch(e){} }
+  const [lat,lng] = CITY_LL[city] || CITY_LL.tokyo;
+  let v = null;
+  try{
+    const r = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&lat=${lat}&lon=${lng}&limit=5&lang=en`);
+    const j = await r.json();
+    const f = (j.features||[]).find(f=>f.properties?.countrycode==="JP");
+    if(f) v = {lat:f.geometry.coordinates[1], lng:f.geometry.coordinates[0], name:f.properties.name||q};
+  }catch(e){}
+  if(!v){
+    const r = await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=jp&accept-language=en&q=${encodeURIComponent(q)}`);
+    const j = await r.json().catch(()=>[]);
+    if(j[0]) v = {lat:+j[0].lat, lng:+j[0].lon, name:j[0].name||q};
+  }
+  if(!v) throw new Error(`Couldn't find "${q}" on the map. An editor can fix the "Google Maps search" text for this stop.`);
+  // keep results near the day's city (avoids same-name places elsewhere in Japan)
+  if(km(v,{lat,lng}) > 80) throw new Error(`Search for "${q}" landed far from ${CITY[city]?.n||"the city"}. An editor can make the search text more specific.`);
+  store.set(ck, JSON.stringify(v)); return v;
+}
+function getGPS(){
+  return new Promise((res,rej)=>{
+    if(!navigator.geolocation) return rej(new Error("This browser can't share your location."));
+    navigator.geolocation.getCurrentPosition(
+      p=>res({lat:p.coords.latitude, lng:p.coords.longitude}),
+      e=>rej(new Error(e.code===1 ? "Location access is off. Allow location for this site in your browser settings, then try again." : "Couldn't get your location. Try again outside or near a window.")),
+      {enableHighAccuracy:true, timeout:15000, maximumAge:30000});
+  });
+}
+const km = (a,b)=>{ const R=6371, t=x=>x*Math.PI/180, dLa=t(b.lat-a.lat), dLo=t(b.lng-a.lng);
+  const h=Math.sin(dLa/2)**2+Math.cos(t(a.lat))*Math.cos(t(b.lat))*Math.sin(dLo/2)**2; return 2*R*Math.asin(Math.sqrt(h)); };
+async function getRoute(o, d, mode){
+  const prof = mode==="WALK" ? "routed-foot" : "routed-car";
+  const r = await fetch(`https://routing.openstreetmap.de/${prof}/route/v1/driving/${o.lng},${o.lat};${d.lng},${d.lat}?overview=full&geometries=geojson&steps=true`);
+  const j = await r.json().catch(()=>({}));
+  if(!r.ok || j.code!=="Ok" || !j.routes?.[0]) throw new Error("The route service didn't find a route. Try again in a moment.");
+  return j.routes[0];
+}
+function stepText(s){
+  const m = s.maneuver||{}, road = s.name ? ` onto ${s.name}` : "", mod = m.modifier ? m.modifier.replace("sharp ","sharp ").replace("slight ","slight ") : "";
+  switch(m.type){
+    case "depart": return `Head ${["north","northeast","east","southeast","south","southwest","west","northwest"][Math.round((m.bearing_after||0)/45)%8]}${s.name?` on ${s.name}`:""}`;
+    case "arrive": return "Arrive at the destination";
+    case "turn": case "end of road": case "fork": return `${m.type==="fork"?"Keep":"Turn"} ${mod}${road}`;
+    case "new name": case "continue": return `Continue${s.name?` on ${s.name}`:""}`;
+    case "roundabout": case "rotary": return `At the roundabout, take exit ${m.exit||""}${road}`;
+    case "merge": case "on ramp": case "off ramp": return `${m.type==="merge"?"Merge":"Take the ramp"} ${mod}${road}`;
+    default: return `${mod?mod[0].toUpperCase()+mod.slice(1):"Continue"}${road}`;
+  }
+}
+const fmtDur = m => m>=60 ? `${Math.floor(m/60)} h ${m%60} min` : `${m} min`;
+const fmtDist = m => m>=1000 ? `${(m/1000).toFixed(1)} km` : `${Math.round(m/10)*10} m`;
+const taxiFare = m => Math.round((500 + Math.max(0, m-1096)/255*100) * 1.1 / 10) * 10;   // rough meter estimate
+
+function closeDir(){
+  if(watchId!==null && navigator.geolocation) navigator.geolocation.clearWatch(watchId);
+  watchId = null;
+  if(openDir?.map){ try{ openDir.map.remove() }catch(e){} }
+  openDir = null;
+}
+function dirPanelHTML(){
+  return `<div class="svbox" hidden><img alt=""><span>Street View near this stop</span></div>
+    <div class="dirctl">
+      <div class="seg" role="group" aria-label="Start from"><button type="button" data-o="gps">My location</button><button type="button" data-o="prev">Previous stop</button></div>
+      <div class="seg" role="group" aria-label="Travel by"><button type="button" data-m="WALK">Walk</button><button type="button" data-m="DRIVE">Taxi</button></div>
+    </div>
+    <p class="dirsum" role="status">Loading map…</p>
+    <div class="mapbox"></div>
+    <details class="steps" hidden><summary>Turn-by-turn steps</summary><ol></ol></details>
+    <p class="trainnote"></p>`;
+}
+async function toggleDir(i, k, btn){
+  const panel = btn.nextElementSibling;
+  if(openDir && openDir.panel === panel){ closeDir(); panel.hidden = true; panel.innerHTML=""; btn.setAttribute("aria-expanded","false"); return; }
+  if(openDir){ const o=openDir; closeDir(); o.panel.hidden = true; o.panel.innerHTML=""; o.btn.setAttribute("aria-expanded","false"); }
+  panel.innerHTML = dirPanelHTML(); panel.hidden = false; btn.setAttribute("aria-expanded","true");
+  const day = DATA.days[i], stop = day.stops[k], color = getComputedStyle(dayEl).getPropertyValue("--c").trim() || "#1C61C4";
+  const prevIdx = (()=>{ for(let p=k-1;p>=0;p--) if(day.stops[p].map) return p; return -1; })();
+  const st = openDir = {panel, btn, origin:"gps", mode:null, map:null, layer:null, you:null};
+  if(prevIdx<0) panel.querySelector('[data-o="prev"]').disabled = true;
+  panel.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>{ st.origin=b.dataset.o; st.mode=null; run(); });
+  panel.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{ st.mode=b.dataset.m; run(); });
+  const sum = panel.querySelector(".dirsum"), stepsEl = panel.querySelector(".steps"), train = panel.querySelector(".trainnote");
+  trainText();
+
+  async function run(){
+    if(openDir !== st) return;
+    panel.querySelectorAll("[data-o]").forEach(b=>b.setAttribute("aria-pressed", b.dataset.o===st.origin));
+    stepsEl.hidden = true; sum.textContent = st.origin==="gps" ? "Finding your location…" : "Finding the route…";
+    try{
+      await loadLeaflet();
+      const dest = await findPlace(stop.map, day.city);
+      if(openDir !== st) return;
+      showStreetView(dest);
+      if(!st.map){
+        st.map = L.map(panel.querySelector(".mapbox"), {zoomControl:true, scrollWheelZoom:false}).setView([dest.lat,dest.lng], 15);
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom:19,
+          attribution:'© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> · Routes: FOSSGIS/OSRM'}).addTo(st.map);
+      }
+      if(st.layer) st.layer.remove();
+      st.layer = L.layerGroup().addTo(st.map);
+      L.circleMarker([dest.lat,dest.lng], {radius:10, color:"#fff", weight:3, fillColor:color, fillOpacity:1}).bindTooltip(stop.name).addTo(st.layer);
+
+      let origin, note = "";
+      if(st.origin==="gps"){
+        origin = await getGPS();
+        const far = km(origin, dest);
+        if(far > 60){
+          if(prevIdx>=0){ note = `You're about ${Math.round(far).toLocaleString()} km away, so this shows the route from the previous stop. `; st.origin="prev"; panel.querySelectorAll("[data-o]").forEach(b=>b.setAttribute("aria-pressed", b.dataset.o==="prev")); }
+          else { st.map.setView([dest.lat,dest.lng],15); sum.textContent = `You're about ${Math.round(far).toLocaleString()} km away. Directions from your location will work once you're in ${CITY[day.city].n}.`; return; }
+        } else {
+          st.you = L.circleMarker([origin.lat,origin.lng], {radius:8, color:"#fff", weight:3, fillColor:"#1A73E8", fillOpacity:1}).bindTooltip("You").addTo(st.layer);
+          if(watchId===null && navigator.geolocation) watchId = navigator.geolocation.watchPosition(p=>{ if(st.you) st.you.setLatLng([p.coords.latitude,p.coords.longitude]); }, ()=>{}, {enableHighAccuracy:true, maximumAge:10000});
+        }
+      }
+      if(st.origin==="prev"){
+        origin = await findPlace(day.stops[prevIdx].map, day.city);
+        L.circleMarker([origin.lat,origin.lng], {radius:7, color:"#fff", weight:3, fillColor:"#5B6474", fillOpacity:1}).bindTooltip(day.stops[prevIdx].name).addTo(st.layer);
+      }
+      if(!st.mode) st.mode = km(origin, dest) <= 2 ? "WALK" : "DRIVE";
+      panel.querySelectorAll("[data-m]").forEach(b=>b.setAttribute("aria-pressed", b.dataset.m===st.mode));
+      sum.textContent = note + "Finding the route…";
+      const rt = await getRoute(origin, dest, st.mode);
+      if(openDir !== st) return;
+      const line = L.geoJSON(rt.geometry, {style:{color: st.mode==="WALK" ? "#2F8642" : "#1C61C4", weight:5, opacity:.85}}).addTo(st.layer);
+      st.map.fitBounds(line.getBounds(), {padding:[30,30]});
+      const m = Math.max(1, Math.round(rt.duration/60)), dist = rt.distance||0;
+      const from = st.origin==="gps" ? "from you" : `from ${day.stops[prevIdx].name}`;
+      sum.innerHTML = esc(note) + (st.mode==="WALK"
+        ? `<b>${fmtDur(m)} walk</b>, ${fmtDist(dist)} ${esc(from)}.${m>30?" That's a long walk; consider the train or a taxi.":""}`
+        : `<b>About ${fmtDur(Math.round(m*1.3))} by taxi</b>, ${fmtDist(dist)} ${esc(from)}. Rough fare ¥${taxiFare(dist).toLocaleString()}, about ¥${(Math.ceil(taxiFare(dist)/4/10)*10).toLocaleString()} each.`);
+      const steps = (rt.legs?.[0]?.steps||[]).filter(s=>s.distance>0 || s.maneuver?.type==="arrive");
+      if(steps.length){
+        stepsEl.querySelector("ol").innerHTML = steps.map(s=>`<li>${esc(stepText(s))}${s.distance>0?` <span>${fmtDist(s.distance)}</span>`:""}</li>`).join("");
+        stepsEl.hidden = false;
+      }
+      trainText(origin);
+    }catch(err){ if(openDir===st) sum.textContent = err.message; }
+  }
+  function showStreetView(dest){
+    if(!MAPCFG.svKey) return;
+    const box = panel.querySelector(".svbox"), img = box.querySelector("img");
+    img.onload = ()=>{ box.hidden = false; };
+    img.onerror = ()=>{ box.hidden = true; };
+    img.alt = `Street View near ${stop.name}`;
+    img.src = `https://maps.googleapis.com/maps/api/streetview?size=640x300&scale=2&location=${dest.lat},${dest.lng}&radius=150&source=outdoor&fov=90&return_error_code=true&key=${encodeURIComponent(MAPCFG.svKey)}`;
+  }
+  function trainText(origin){
+    const link = `https://www.google.com/maps/dir/?api=1${origin?`&origin=${origin.lat},${origin.lng}`:""}&destination=${encodeURIComponent(stop.map)}&travelmode=transit`;
+    train.innerHTML = `<b>By train:</b> follow "How to get there" above. Free map services don't have Japanese train routes, so live train times are only in the Google Maps app (<a href="${link}" target="_blank" rel="noopener">open train times</a>).`;
+  }
+  run();
+}
+
+// ---------- Pages ----------
+const pillsEl = $("pills"), dayEl = $("day"), genEl = $("general");
+function renderPills(){
+  pillsEl.innerHTML = "";
+  const g = document.createElement("button");
+  g.className="pill"; g.type="button"; g.style.setProperty("--c","#4A5568");
+  g.innerHTML="Before you go<small>Bookings, tips</small>";
+  g.onclick=()=>showInfo(true); pillsEl.appendChild(g);
+  DATA.days.forEach((d,i)=>{
+    const b=document.createElement("button"); b.className="pill"; b.type="button";
+    b.style.setProperty("--c", CITY[d.city].c);
+    b.innerHTML=`${esc(d.short)}<small>${CITY[d.city].n}</small>`;
+    b.onclick=()=>show(i,true); pillsEl.appendChild(b);
+  });
+  markPill();
+}
+function markPill(){ [...pillsEl.children].forEach((p,j)=>p.setAttribute("aria-pressed", j===cur+1)); }
+
+function show(i, user){
+  closeDir();
+  cur = i; const d = DATA.days[i], c = CITY[d.city];
+  dayEl.hidden=false; genEl.hidden=true; markPill();
+  if(user){ pillsEl.children[i+1].scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"}); history.replaceState(null,"","#day"+(i+1)); }
+  const stops = d.stops.map((s,k)=>{
+    const name = s.map ? `<a href="${M(s.map)}" target="_blank" rel="noopener">${esc(s.name)}</a>` : esc(s.name);
+    const price = s.price ? `<span class="price${s.price==="Free"?" free":""}">${esc(s.price)}</span>` : "";
+    const tools = editing ? `<div class="tools"><button type="button" data-act="edit" data-k="${k}">Edit</button><button type="button" data-act="up" data-k="${k}" ${k===0?"disabled":""} aria-label="Move up">↑</button><button type="button" data-act="down" data-k="${k}" ${k===d.stops.length-1?"disabled":""} aria-label="Move down">↓</button><button type="button" data-act="del" data-k="${k}">Delete</button></div>` : "";
+    return `<li class="stop">${tools}<div class="when">${esc(s.when)}</div>${pic(s)}<div class="what">${name}</div>${s.about?`<p class="about">${esc(s.about)}</p>`:""}${s.how?`<p class="go"><b>How to get there:</b> ${esc(s.how)}</p>`:""}${price}${s.map?`<button type="button" class="dirbtn" data-k="${k}" aria-expanded="false">Map and directions</button><div class="dirpanel" hidden></div>`:""}</li>`;
+  }).join("");
+  const prev = i>0 ? DATA.days[i-1].short : "", next = i<DATA.days.length-1 ? DATA.days[i+1].short : "";
+  dayEl.style.setProperty("--c", c.c);
+  dayEl.innerHTML = `
+    <div class="dayhead">
+      <div class="date">Day ${i+1}, ${esc(d.d)}</div>
+      <h3>${esc(d.t)}</h3>
+      <div class="kanji" lang="ja" aria-hidden="true">${c.k}</div>
+    </div>
+    <div class="nav">
+      <button type="button" id="pv">◀ ${i===0?"Before you go":esc(prev)}</button>
+      <button type="button" id="nx" ${i===DATA.days.length-1?"disabled":""}>${esc(next)} ▶</button>
+    </div>
+    ${editing?`<div class="dayedit"><button type="button" id="editDay">Edit day title and note</button><button type="button" id="addStop">+ Add a stop</button></div>`:""}
+    <ol class="stops">${stops}</ol>
+    ${d.note?`<p class="note">${esc(d.note)}</p>`:""}
+    ${costHTML(d)}`;
+  dayEl.querySelectorAll(".dirbtn").forEach(b=>b.onclick=()=>toggleDir(i,+b.dataset.k,b));
+  $("pv").onclick=()=> i===0 ? showInfo(true) : show(i-1,true);
+  $("nx").onclick=()=> show(i+1,true);
+  if(editing){
+    $("editDay").onclick=()=>openDayDlg(i);
+    $("addStop").onclick=()=>openStopDlg(i,-1);
+    dayEl.querySelectorAll(".tools button").forEach(b=>b.onclick=()=>stopAction(i,+b.dataset.k,b.dataset.act));
+  }
+}
+function showInfo(user){
+  closeDir();
+  cur=-1; dayEl.hidden=true; genEl.hidden=false; markPill();
+  if(user){ pillsEl.children[0].scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"}); history.replaceState(null,"","#before"); }
+}
+function rerender(){ renderPills(); renderChecks(); renderMeta(); cur>=0 ? show(cur,false) : showInfo(false); }
+
+// ---------- Checklist (ticks saved per phone) ----------
+const KEY="jp26-checks";
+function renderChecks(){
+  let done={}; try{ done=JSON.parse(store.get(KEY)||"{}")||{} }catch(e){}
+  const ul=$("checks"); ul.innerHTML="";
+  DATA.todo.forEach(t=>{
+    const li=document.createElement("li");
+    li.innerHTML=`<label><input type="checkbox" ${done[t[0]]?"checked":""}><span><b>${esc(t[0])}</b>${esc(t[1])}</span></label>`;
+    li.querySelector("input").onchange=e=>{ done[t[0]]=e.target.checked; store.set(KEY,JSON.stringify(done)); prog(done); };
+    ul.appendChild(li);
+  });
+  prog(done);
+}
+function prog(done){ const n=DATA.todo.filter(t=>done[t[0]]).length; $("prog").textContent=`${n} of ${DATA.todo.length} done`; }
+
+function renderMeta(){
+  const m=$("meta");
+  if(meta && meta.updatedAt){
+    const when=new Date(meta.updatedAt).toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
+    m.textContent=`Last updated ${when}${meta.updatedBy?` by ${meta.updatedBy}`:""}.`;
+  } else m.textContent="";
+}
+
+// ---------- Loading the shared version ----------
+async function load(){
+  try{
+    const r = await fetch("/api/itinerary",{cache:"no-store"});
+    if(!r.ok) throw new Error(r.status);
+    const j = await r.json();
+    online = true;
+    if(j && Array.isArray(j.days) && j.days.length===10){
+      DATA = {days:j.days, todo:j.todo||[]}; SAVED = clone(DATA);
+      version = j.version||0; meta = {updatedAt:j.updatedAt, updatedBy:j.updatedBy};
+    } else { version = 0; }
+  }catch(e){ online = false; }
+  $("editBtn").hidden = !online;
+}
+
+// ---------- Editing ----------
+function setDirty(v){ dirty=v; $("savebar").hidden=!v; document.body.classList.toggle("hasbar",v); }
+function changed(){ setDirty(true); $("costHint").hidden=false; rerender(); }
+
+$("editBtn").onclick = ()=>{
+  if(editing){ editing=false; $("editBtn").textContent="Edit plan"; $("editPanel").hidden=true; rerender(); return; }
+  if(!store.get("jp26-code")){ $("uName").value=store.get("jp26-name")||""; $("unlock").showModal(); return; }
+  startEditing();
+};
+function startEditing(){ editing=true; $("editBtn").textContent="Done editing"; $("editPanel").hidden=false; rerender(); }
+$("unlockForm").onsubmit = e=>{
+  e.preventDefault();
+  store.set("jp26-code",$("uCode").value.trim()); store.set("jp26-name",$("uName").value.trim());
+  $("unlock").close(); startEditing();
+};
+document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest("dialog").close());
+
+function stopAction(i,k,act){
+  const st=DATA.days[i].stops;
+  if(act==="edit") return openStopDlg(i,k);
+  if(act==="del"){ if(!confirm(`Delete "${st[k].name}"?`)) return; st.splice(k,1); }
+  if(act==="up" && k>0) [st[k-1],st[k]]=[st[k],st[k-1]];
+  if(act==="down" && k<st.length-1) [st[k+1],st[k]]=[st[k],st[k+1]];
+  changed();
+}
+const PIC_KEYS = Object.keys(SCN);
+$("fPic").innerHTML = `<option value="">No picture</option>` + PIC_KEYS.map(k=>`<option value="${k}">${k}</option>`).join("");
+let stopTarget=null;
+function openStopDlg(i,k){
+  stopTarget=[i,k];
+  const s = k>=0 ? DATA.days[i].stops[k] : {when:"",name:"",map:"",about:"",how:"",price:"",pic:""};
+  $("stopTitle").textContent = k>=0 ? "Edit stop" : "Add a stop";
+  for(const f of ["when","name","map","about","how","price","pic"]) $("f"+f[0].toUpperCase()+f.slice(1)).value = s[f]||"";
+  $("stopDlg").showModal();
+}
+$("stopForm").onsubmit = e=>{
+  e.preventDefault();
+  const s={}; for(const f of ["when","name","map","about","how","price","pic"]) s[f]=$("f"+f[0].toUpperCase()+f.slice(1)).value.trim();
+  const [i,k]=stopTarget; if(k>=0) DATA.days[i].stops[k]=s; else DATA.days[i].stops.push(s);
+  $("stopDlg").close(); changed();
+};
+function openDayDlg(i){ $("dTitle").value=DATA.days[i].t; $("dNote").value=DATA.days[i].note||""; $("dayDlg").showModal(); }
+$("dayForm").onsubmit = e=>{ e.preventDefault(); DATA.days[cur].t=$("dTitle").value.trim(); DATA.days[cur].note=$("dNote").value.trim(); $("dayDlg").close(); changed(); };
+
+$("discard").onclick = ()=>{ if(!confirm("Discard your unsaved changes?")) return; DATA=clone(SAVED); setDirty(false); $("costHint").hidden=true; rerender(); };
+$("save").onclick = async ()=>{
+  const btn=$("save"); btn.disabled=true; btn.textContent="Saving…";
+  try{
+    const r = await fetch("/api/itinerary",{method:"PUT",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({code:store.get("jp26-code"),name:store.get("jp26-name"),baseVersion:version,data:DATA})});
+    const j = await r.json().catch(()=>({}));
+    if(r.status===401){ store.del("jp26-code"); alert("Wrong passcode. Tap Edit plan again to re-enter it."); return; }
+    if(r.status===409){ alert("Someone else saved changes while you were editing. Your edits are still on screen: copy anything you need, then reload the page to see their version."); return; }
+    if(!r.ok) throw new Error(j.error||r.status);
+    version=j.version; meta={updatedAt:j.updatedAt,updatedBy:j.updatedBy}; SAVED=clone(DATA);
+    setDirty(false); renderMeta(); flash("Saved. Everyone now sees this version.");
+  }catch(err){ alert("Couldn't save: "+err.message); }
+  finally{ btn.disabled=false; btn.textContent="Save for everyone"; }
+};
+window.addEventListener("beforeunload",e=>{ if(dirty){ e.preventDefault(); e.returnValue=""; } });
+
+// ---------- AI ----------
+async function askAI(mode){
+  const instruction=$("aiText").value.trim();
+  if(mode==="edit" && !instruction){ $("aiText").focus(); return; }
+  const status=$("aiStatus"); const btns=[$("aiGo"),$("aiCost")];
+  btns.forEach(b=>b.disabled=true); status.textContent = mode==="costs" ? "Recomputing costs for all 10 days… this can take up to 30 seconds." : "Working on it… this can take up to 30 seconds.";
+  try{
+    const r = await fetch("/api/ai-edit",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({code:store.get("jp26-code"),mode,instruction,focusDay:cur,data:DATA})});
+    const j = await r.json().catch(()=>({error:"The server didn't answer in time. Try a smaller change."}));
+    if(r.status===401){ store.del("jp26-code"); status.textContent="Wrong passcode. Tap Done editing, then Edit plan to re-enter it."; return; }
+    if(!r.ok) throw new Error(j.error||("Error "+r.status));
+    const touched=new Set();
+    (j.days||[]).forEach(x=>{ const keep=DATA.days[x.index]; DATA.days[x.index]={...x.day,d:keep.d,short:keep.short}; touched.add(x.index); });
+    (j.costs||[]).forEach(x=>{ DATA.days[x.index].cost=x.cost; touched.add(x.index); });
+    if(Array.isArray(j.todo)) DATA.todo=j.todo;
+    if(!touched.size && !Array.isArray(j.todo)){ status.textContent=(j.summary||"")+" Nothing was changed."; return; }
+    setDirty(true); if(mode==="costs") $("costHint").hidden=true;
+    const list=[...touched].sort((a,b)=>a-b).map(i=>DATA.days[i].short).join(", ");
+    status.textContent=`${j.summary} Changed: ${list}. Review it, then tap Save for everyone (or Discard).`;
+    if(mode==="edit") $("aiText").value="";
+    rerender();
+  }catch(err){ status.textContent="Couldn't apply that: "+err.message; }
+  finally{ btns.forEach(b=>b.disabled=false); }
+}
+$("aiGo").onclick=()=>askAI("edit");
+$("aiCost").onclick=()=>askAI("costs");
+
+function flash(t){ const f=$("flash"); f.textContent=t; f.hidden=false; clearTimeout(flash.t); flash.t=setTimeout(()=>f.hidden=true,3500); }
+
+// ---------- Start ----------
+(async function(){
+  await Promise.all([load(), loadConfig()]);
+  renderPills(); renderChecks(); renderMeta();
+  const m = location.hash.match(/day(\d+)/);
+  const diff = Math.floor((new Date() - new Date(2026,10,11))/86400000);
+  if(m){ show(Math.min(Math.max(+m[1]-1,0),9),false); }
+  else if(location.hash!=="#before" && diff>=0 && diff<10){ show(diff,false); }
+  else showInfo(false);
+  if(cur>=0) pillsEl.children[cur+1].scrollIntoView({inline:"center",block:"nearest"});
+})();
+
+</script>
+</body>
+</html>
