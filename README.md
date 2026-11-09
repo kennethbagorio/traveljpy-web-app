@@ -44,6 +44,9 @@ Maps and routes use free OpenStreetMap services, so no map key is needed:
 
 Street View photos (optional): set `GOOGLE_STREETVIEW_KEY` to your Street View Static API key. In Google Cloud, restrict that key to **Websites** with `https://YOUR-SITE.netlify.app/*`, because it's visible in the browser. Without the key, everything else still works.
 
+## Photos
+Each stop shows a real photo: first from Wikipedia / Wikimedia Commons (free, no key), then a Google Street View photo if `GOOGLE_STREETVIEW_KEY` is set, and the drawn picture only if neither exists. Tap the small credit on a photo to see its author and licence. Editors can change a stop's photo by editing its "Wikipedia article for the photo" field.
+
 ## Using it
 - Share the site link in Messenger. Send the passcode only to the people who should edit.
 - Tap **Edit plan**, enter your name and the passcode.

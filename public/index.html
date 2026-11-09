@@ -3,35 +3,38 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Japan Trip · Nov 11–20, 2026</title>
+<title>Maya’s Japan Travel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#E7EAEE; --sign:#FFFFFF; --ink:#18202E; --muted:#5B6474; --rule:#D3D8DF;
-  --osaka:#D4461F; --kyoto:#7E3C98; --nara:#2F8642; --tokyo:#1C61C4; --rail:#18202E;
-  --chip:#F1F3F6; --focus:#1C61C4;
+  --bg:#F2ECDF; --sign:#FBF8F1; --ink:#23201B; --muted:#6B6357; --rule:#DED4C2;
+  --osaka:#C23B22; --kyoto:#6A3D8C; --nara:#4E7A33; --tokyo:#24477F; --rail:#23201B;
+  --chip:#EFE7D7; --focus:#24477F; --gold:#A8823A; --fiber:rgba(120,95,60,.07);
+  --mincho:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#11161F; --sign:#1A212D; --ink:#EEF1F5; --muted:#A3ACBA; --rule:#2C3545;
-    --osaka:#F0714B; --kyoto:#B27BCB; --nara:#5DB86E; --tokyo:#5B9BF0; --rail:#EEF1F5;
-    --chip:#242C3A; --focus:#5B9BF0;
+    --bg:#17140F; --sign:#221E18; --ink:#F1EADC; --muted:#B4A991; --rule:#3B342A;
+    --osaka:#E2684A; --kyoto:#AC88CB; --nara:#93BC6E; --tokyo:#86A7DD; --rail:#F1EADC;
+    --chip:#2C271F; --focus:#86A7DD; --gold:#D2AE62; --fiber:rgba(255,240,210,.035);
   }
 }
 :root[data-theme="dark"]{
-  --bg:#11161F; --sign:#1A212D; --ink:#EEF1F5; --muted:#A3ACBA; --rule:#2C3545;
-  --osaka:#F0714B; --kyoto:#B27BCB; --nara:#5DB86E; --tokyo:#5B9BF0; --rail:#EEF1F5;
-  --chip:#242C3A; --focus:#5B9BF0;
+  --bg:#17140F; --sign:#221E18; --ink:#F1EADC; --muted:#B4A991; --rule:#3B342A;
+  --osaka:#E2684A; --kyoto:#AC88CB; --nara:#93BC6E; --tokyo:#86A7DD; --rail:#F1EADC;
+  --chip:#2C271F; --focus:#86A7DD; --gold:#D2AE62; --fiber:rgba(255,240,210,.035);
 }
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:border-box}
 body{
-  margin:0; background:var(--bg); color:var(--ink);
+  margin:0; background-color:var(--bg); color:var(--ink);
+  background-image:radial-gradient(var(--fiber) 1px, transparent 1.5px), radial-gradient(var(--fiber) 1px, transparent 1.5px);
+  background-size:7px 7px, 11px 11px; background-position:0 0, 3px 5px;
   font-family:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP","Yu Gothic",system-ui,sans-serif;
   font-size:16px; line-height:1.55; -webkit-text-size-adjust:100%;
 }
@@ -39,19 +42,41 @@ a{color:inherit}
 :focus-visible{outline:3px solid var(--focus); outline-offset:2px; border-radius:4px}
 .wrap{max-width:680px; margin:0 auto; padding:16px 14px 48px}
 
-/* Station nameboard hero */
-.board{
-  background:var(--sign); border-radius:6px; padding:22px 18px 0; position:relative; overflow:hidden;
-  box-shadow:0 1px 0 var(--rule);
+/* Hero: paper card, hanko seal, momiji leaves, seigaiha waves */
+.hero{
+  background:var(--sign); border-radius:4px; padding:66px 18px 0; position:relative; overflow:hidden; text-align:center;
+  box-shadow:0 1px 0 var(--rule), inset 0 0 0 1px var(--rule);
 }
-.board h1{margin:0; text-align:center; font-weight:900; font-size:clamp(44px,14vw,76px); line-height:1; letter-spacing:.02em}
-.board .romaji{text-align:center; font-size:clamp(20px,5.5vw,28px); font-weight:700; margin:6px 0 2px; letter-spacing:.04em}
-.board .sub{text-align:center; color:var(--muted); font-size:14px; margin:0 0 18px}
+.hero .jp{margin:0; font-family:var(--mincho); font-weight:600; font-size:15px; letter-spacing:.35em; color:var(--osaka)}
+.hero h1{margin:8px 0 6px; font-family:var(--mincho); font-weight:800; font-size:clamp(30px,9vw,50px); line-height:1.05; letter-spacing:.06em}
+.hero .sub{color:var(--muted); font-size:14px; margin:0 0 18px}
+.seal{
+  position:absolute; top:12px; right:14px; width:46px; height:46px; display:grid; place-items:center;
+  background:var(--osaka); color:#FBF3E8; font-family:var(--mincho); font-weight:800; font-size:28px; line-height:1;
+  border-radius:5px; transform:rotate(-6deg); box-shadow:inset 0 0 0 3px var(--osaka), inset 0 0 0 4.5px rgba(251,243,232,.8);
+}
+.momiji{position:absolute; pointer-events:none}
+.momiji.a{top:10px; left:10px; width:34px; transform:rotate(-20deg)}
+.momiji.b{top:30px; left:46px; width:20px; transform:rotate(25deg); opacity:.85}
+.momiji.c{top:16px; right:72px; width:20px; transform:rotate(40deg); opacity:.8}
 .route{display:flex; height:30px; margin:0 -18px}
-.route span{flex:var(--n); display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:700; white-space:nowrap; overflow:hidden}
-.ends{display:flex; justify-content:space-between; font-size:13px; font-weight:500; padding:10px 0 14px}
+.route span{flex:var(--n); display:flex; align-items:center; justify-content:center; gap:5px; color:var(--sign); font-size:12px; font-weight:700; white-space:nowrap; overflow:hidden}
+.route span i{font-style:normal; font-family:var(--mincho); font-size:13px}
+.ends{display:flex; justify-content:space-between; font-size:13px; font-weight:500; padding:10px 0 14px; text-align:left}
 .ends b{display:block; font-size:16px}
 .ends div:last-child{text-align:right}
+.waves{
+  height:30px; margin:0 -18px;
+  --w:var(--tokyo); --p:var(--sign);
+  background-color:var(--p);
+  background-image:
+    radial-gradient(circle at 100% 150%, var(--p) 24%, var(--w) 24%, var(--w) 28%, var(--p) 28%, var(--p) 36%, var(--w) 36%, var(--w) 40%, transparent 40%, transparent),
+    radial-gradient(circle at 0 150%, var(--p) 24%, var(--w) 24%, var(--w) 28%, var(--p) 28%, var(--p) 36%, var(--w) 36%, var(--w) 40%, transparent 40%, transparent),
+    radial-gradient(circle at 50% 100%, var(--w) 10%, var(--p) 10%, var(--p) 23%, var(--w) 23%, var(--w) 30%, var(--p) 30%, var(--p) 43%, var(--w) 43%, var(--w) 50%, var(--p) 50%, var(--p) 63%, var(--w) 63%, var(--w) 71%, transparent 71%, transparent),
+    radial-gradient(circle at 100% 50%, var(--w) 5%, var(--p) 5%, var(--p) 15%, var(--w) 15%, var(--w) 20%, var(--p) 20%, var(--p) 29%, var(--w) 29%, var(--w) 34%, var(--p) 34%, var(--p) 44%, var(--w) 44%, var(--w) 49%, transparent 49%, transparent),
+    radial-gradient(circle at 0 50%, var(--w) 5%, var(--p) 5%, var(--p) 15%, var(--w) 15%, var(--w) 20%, var(--p) 20%, var(--p) 29%, var(--w) 29%, var(--w) 34%, var(--p) 34%, var(--p) 44%, var(--w) 44%, var(--w) 49%, transparent 49%, transparent);
+  background-size:40px 20px; opacity:.9;
+}
 .facts{margin:14px 2px 0; font-size:15px; color:var(--muted)}
 .facts strong{color:var(--ink)}
 
@@ -65,8 +90,8 @@ a{color:inherit}
   border-radius:999px; padding:5px 11px; font:inherit; font-size:13px; font-weight:700; cursor:pointer; line-height:1.2;
 }
 .pill small{display:block; font-weight:500; font-size:11px; color:var(--muted)}
-.pill[aria-pressed="true"]{background:var(--c); color:#fff}
-.pill[aria-pressed="true"] small{color:#fff; opacity:.85}
+.pill[aria-pressed="true"]{background:var(--c); color:var(--sign)}
+.pill[aria-pressed="true"] small{color:var(--sign); opacity:.9}
 
 /* Day card */
 .day{background:var(--sign); border-radius:6px; margin-top:6px; overflow:hidden}
@@ -75,8 +100,8 @@ a{color:inherit}
 .dayhead .date{font-size:14px; color:var(--muted); font-weight:500}
 .dayhead h3{margin:0; font-size:22px; line-height:1.25; font-weight:900; grid-column:1}
 .dayhead .kanji{grid-column:2; grid-row:1 / span 2}
-.nav{display:flex; justify-content:space-between; background:var(--c); color:#fff}
-.nav button{background:none; border:0; color:#fff; font:inherit; font-size:13px; font-weight:700; padding:9px 14px; cursor:pointer}
+.nav{display:flex; justify-content:space-between; background:var(--c); color:var(--sign)}
+.nav button{background:none; border:0; color:var(--sign); font:inherit; font-size:13px; font-weight:700; padding:9px 14px; cursor:pointer}
 .nav button:disabled{opacity:.35; cursor:default}
 .stops{list-style:none; margin:0; padding:14px 18px 6px}
 .stop{position:relative; padding:0 0 18px 30px}
@@ -98,6 +123,23 @@ a{color:inherit}
 
 
 .pic{display:block; width:100%; height:auto; aspect-ratio:12/5; border-radius:6px; margin:6px 0 8px}
+.photo{margin:6px 0 8px; position:relative}
+.photo img{display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; border-radius:6px; background:var(--rule)}
+.photo figcaption{position:absolute; right:6px; bottom:6px; font-size:11px; background:rgba(0,0,0,.55); color:#fff; padding:1px 6px; border-radius:3px}
+.photo figcaption a{color:#fff}
+
+/* Japanese type and details */
+.dayhead h3,section.block > h2,.dayhead .kanji,.cost h4,dialog h3,.editp h3{font-family:var(--mincho); font-weight:800}
+.dayhead .kanji{font-size:50px}
+section.block > h2::before{content:""; display:inline-block; width:6px; height:.95em; background:var(--osaka); margin-right:10px; vertical-align:-2px; border-radius:1px}
+.day,.card{box-shadow:inset 0 0 0 1px var(--rule)}
+.stop::after{border-radius:3px; transform:rotate(45deg); width:14px; height:14px; left:3px; top:5px; border-width:3px}
+.pill{border-radius:4px; font-family:var(--mincho)}
+.pill small{font-family:"Zen Kaku Gothic New",system-ui,sans-serif}
+.sel{background:transparent}
+.sel::before{content:""; position:absolute; inset:0; background:var(--bg); opacity:.94; z-index:-1}
+.note{border-left-color:var(--gold)}
+footer .bye{font-family:var(--mincho); font-size:16px; color:var(--ink); margin:0 0 6px}
 /* Day costs */
 .cost{margin:4px 18px 18px; border-top:2px solid var(--rule); padding-top:14px}
 .cost h4{margin:0 0 2px; font-size:18px; font-weight:900}
@@ -166,13 +208,13 @@ footer a{margin-right:10px}
 /* Maps */
 .dirbtn{display:flex; align-items:center; gap:6px; margin-top:10px; border:2px solid var(--c); background:var(--sign); color:var(--ink); border-radius:999px; padding:6px 14px; font:inherit; font-size:14px; font-weight:700; cursor:pointer}
 .dirbtn::before{content:""; width:10px; height:10px; border-radius:50% 50% 50% 0; transform:rotate(-45deg); background:var(--c)}
-.dirbtn[aria-expanded="true"]{background:var(--c); color:#fff}
+.dirbtn[aria-expanded="true"]{background:var(--c); color:var(--sign)}
 .dirbtn[aria-expanded="true"]::before{background:#fff}
 .dirpanel{margin-top:10px; background:var(--chip); border-radius:6px; padding:10px}
 .dirctl{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:8px}
 .seg{display:inline-flex; border:2px solid var(--rule); border-radius:999px; overflow:hidden; background:var(--sign)}
 .seg button{border:0; background:none; color:var(--ink); font:inherit; font-size:13px; font-weight:700; padding:6px 12px; cursor:pointer}
-.seg button[aria-pressed="true"]{background:var(--c); color:#fff}
+.seg button[aria-pressed="true"]{background:var(--c); color:var(--sign)}
 .seg button:disabled{opacity:.4; cursor:default}
 .dirsum{margin:0 0 8px; font-size:14px}
 .mapbox{width:100%; height:280px; border-radius:6px; overflow:hidden; background:var(--rule)}
@@ -231,23 +273,25 @@ dialog textarea{min-height:76px; resize:vertical}
 <body>
 <div class="wrap">
 
-  <header class="board" aria-label="Trip overview">
-    <h1 lang="ja">日本</h1>
-    <p class="romaji">Japan, Nov 11–20, 2026</p>
-    <p class="sub">4 travellers</p>
+  <header class="hero" aria-label="Trip overview">
+    <svg class="momiji a" viewBox="0 0 100 100" aria-hidden="true"><path fill="var(--osaka)" d="M50 4 L58 30 L80 14 L70 40 L96 40 L72 54 L88 74 L62 66 L56 92 L50 70 L44 92 L38 66 L12 74 L28 54 L4 40 L30 40 L20 14 L42 30 Z"/><path d="M50 70 L50 99" stroke="var(--osaka)" stroke-width="3"/></svg><svg class="momiji b" viewBox="0 0 100 100" aria-hidden="true"><path fill="var(--gold)" d="M50 4 L58 30 L80 14 L70 40 L96 40 L72 54 L88 74 L62 66 L56 92 L50 70 L44 92 L38 66 L12 74 L28 54 L4 40 L30 40 L20 14 L42 30 Z"/><path d="M50 70 L50 99" stroke="var(--gold)" stroke-width="3"/></svg><svg class="momiji c" viewBox="0 0 100 100" aria-hidden="true"><path fill="var(--osaka)" d="M50 4 L58 30 L80 14 L70 40 L96 40 L72 54 L88 74 L62 66 L56 92 L50 70 L44 92 L38 66 L12 74 L28 54 L4 40 L30 40 L20 14 L42 30 Z"/><path d="M50 70 L50 99" stroke="var(--osaka)" stroke-width="3"/></svg>
+    <div class="seal" lang="ja" aria-hidden="true">旅</div>
+    <p class="jp" lang="ja">マヤの日本旅行</p>
+    <h1>MAYA’S JAPAN TRAVEL</h1>
+    <p class="sub">Nov 11–20, 2026, 4 travellers</p>
     <div class="route" aria-hidden="true">
-      <span style="--n:2;background:var(--osaka)">Osaka</span>
-      <span style="--n:1;background:var(--kyoto)">Kyoto</span>
-      <span style="--n:1;background:var(--nara)">Nara</span>
-      <span style="--n:6;background:var(--tokyo)">Tokyo</span>
+      <span style="--n:3;background:var(--osaka)"><i lang="ja">大阪</i>Osaka</span>
+      <span style="--n:1.2;background:linear-gradient(90deg,var(--nara) 50%,var(--kyoto) 50%)"><i lang="ja">奈良 京都</i></span>
+      <span style="--n:6;background:var(--tokyo)"><i lang="ja">東京</i>Tokyo</span>
     </div>
     <div class="ends">
       <div>From<b>Kansai Airport</b>Wed Nov 11, 6:20 PM</div>
       <div>To<b>Tokyo</b>Fri Nov 20, travel only</div>
     </div>
+    <div class="waves" aria-hidden="true"></div>
   </header>
 
-  <p class="facts">3 nights in <strong>Osaka</strong> with a full Kyoto day trip, a Nara morning on the way out, then 6 nights in <strong>Tokyo</strong>. Start with Before you go, then tap a day to see its plan, pictures and costs. Every place name opens Google Maps.</p>
+  <p class="facts">3 nights in <strong>Osaka</strong> with a Nara and Kyoto day trip, then 6 nights in <strong>Tokyo</strong>. Start with Before you go, then tap a day to see its plan, pictures and costs. Every place name opens Google Maps.</p>
   <p class="meta" id="meta"></p>
 
   <nav class="sel" aria-label="Choose a day">
@@ -262,6 +306,7 @@ dialog textarea{min-height:76px; resize:vertical}
     <div class="btnrow">
       <button type="button" class="btn" id="aiGo">Ask AI to change it</button>
       <button type="button" class="btn alt" id="aiCost">Recompute all costs with AI</button>
+      <button type="button" class="btn alt" id="useBuiltin">Load the built-in plan</button>
     </div>
     <p id="costHint" hidden>You changed stops by hand, so costs may be out of date. Tap Recompute all costs with AI.</p>
     <p id="aiStatus" role="status"></p>
@@ -296,6 +341,7 @@ dialog textarea{min-height:76px; resize:vertical}
   </div>
 
   <footer>
+    <p class="bye"><span lang="ja">よい旅を</span>: have a wonderful trip.</p>
     <p>Prices checked October 2026 and can change. Sources:
       <a href="https://selfguidejapan.com/blog/things-to-do-in-kyoto">Kyoto fees</a>
       <a href="https://watabi.org/en/articles/osaka-castle-guide">Osaka Castle</a>
@@ -326,7 +372,8 @@ dialog textarea{min-height:76px; resize:vertical}
   <label>What it is<textarea id="fAbout" maxlength="700"></textarea></label>
   <label>How to get there<textarea id="fHow" maxlength="700"></textarea></label>
   <label>Entry price label<small>e.g. ¥500 or Free</small><input id="fPrice" maxlength="40"></label>
-  <label>Picture<select id="fPic"></select></label>
+  <label>Wikipedia article for the photo<small>Exact English Wikipedia title, e.g. "Osaka Castle". Leave empty for no photo.</small><input id="fWiki" maxlength="120"></label>
+  <label>Drawing if no photo<select id="fPic"></select></label>
   <div class="btnrow"><button type="submit" class="btn">Done</button><button type="button" class="btn alt" data-close>Cancel</button></div>
 </form></dialog>
 
@@ -338,767 +385,7 @@ dialog textarea{min-height:76px; resize:vertical}
 </form></dialog>
 
 <script>
-const DEFAULT = {
- "version": 0,
- "days": [
-  {
-   "d": "Wed Nov 11",
-   "short": "Nov 11",
-   "city": "osaka",
-   "t": "Arrive and eat in Dotonbori",
-   "note": "",
-   "stops": [
-    {
-     "when": "6:20 PM",
-     "name": "Land at Kansai Airport",
-     "map": "",
-     "about": "Osaka's international airport, built on a man-made island in Osaka Bay. Allow about an hour for immigration, bags and customs.",
-     "how": "After customs, follow the signs for Railways. The station is across the walkway from Terminal 1 arrivals; Terminal 2 has a free shuttle bus to it.",
-     "price": "",
-     "pic": "plane"
-    },
-    {
-     "when": "~7:30 PM",
-     "name": "Nankai Rapi:t to Namba",
-     "map": "Kansai Airport Station",
-     "about": "Nankai's limited express into the city: the blue train with round porthole windows, reserved seats and luggage racks. 38 minutes to Namba.",
-     "how": "At Kansai-Airport Station, buy tickets at the Nankai counter or machines (Nankai, not JR). Ride to the last stop, Namba. Cheaper option: the Nankai Airport Express, ~50 min, ¥970.",
-     "price": "¥1,450–1,700",
-     "pic": "train"
-    },
-    {
-     "when": "Night",
-     "name": "Dotonbori",
-     "map": "Dotonbori Osaka",
-     "about": "Osaka's canal-side street of neon signs, giant food billboards and the Glico running-man sign. Try takoyaki (octopus balls) and okonomiyaki (savoury pancake).",
-     "how": "From Nankai Namba Station, walk about 10 minutes north following signs for Dotonbori. Ebisu Bridge is the best spot for the Glico sign.",
-     "price": "Free",
-     "pic": "dotonbori"
-    }
-   ],
-   "cost": {
-    "entry": [],
-    "train": [
-     [
-      "Nankai Rapi:t, airport to Namba",
-      1450
-     ]
-    ],
-    "food": [
-     [
-      "Street-food dinner in Dotonbori",
-      2000
-     ]
-    ]
-   }
-  },
-  {
-   "d": "Thu Nov 12",
-   "short": "Nov 12",
-   "city": "osaka",
-   "t": "Osaka city tour: castle, Shinsekai, Umeda Sky",
-   "note": "",
-   "stops": [
-    {
-     "when": "9:00 AM",
-     "name": "Osaka Castle",
-     "map": "Osaka Castle Main Tower",
-     "about": "Built in 1583 by the warlord Toyotomi Hideyoshi. Today's tower is a museum of samurai history with an 8th-floor lookout, set in a big park with massive stone walls and moats.",
-     "how": "From Namba, Midosuji line to Hommachi, change to the Chuo line to Tanimachi 4-chome (exit 9), about 20 min. Then a 15-min walk through the park to the tower.",
-     "price": "¥1,200",
-     "pic": "castle"
-    },
-    {
-     "when": "12:30 PM",
-     "name": "Shinsekai and Tsutenkaku",
-     "map": "Shinsekai Osaka",
-     "about": "\"New World\", a retro neighbourhood from 1912 with neon signs, old arcades and the Tsutenkaku tower. It's the home of kushikatsu, deep-fried skewers; the house rule is no double-dipping in the shared sauce.",
-     "how": "From Tanimachi 4-chome, Tanimachi line to Tennoji (~10 min), then a 10-min walk west. Going up Tsutenkaku is optional.",
-     "price": "Free to walk",
-     "pic": "shinsekai"
-    },
-    {
-     "when": "4:00 PM",
-     "name": "Umeda Sky Building",
-     "map": "Umeda Sky Building Floating Garden Observatory",
-     "about": "Twin 173 m towers joined at the top by an open-air rooftop ring, the Floating Garden. One of Osaka's best sunset views (~4:50 PM).",
-     "how": "From Shinsekai, Midosuji line from Dobutsuen-mae to Umeda (~15 min). Walk 10 min northwest from the north side of JR Osaka Station through the underpass. For dinner, Midosuji line back to Namba (~10 min) and walk to Hozenji Yokocho, a lantern-lit stone alley near the hotel.",
-     "price": "~¥2,000",
-     "pic": "umeda"
-    }
-   ],
-   "cost": {
-    "entry": [
-     [
-      "Osaka Castle main tower",
-      1200
-     ],
-     [
-      "Umeda Sky Building",
-      2000
-     ]
-    ],
-    "train": [
-     [
-      "Osaka Metro, 4 rides",
-      900
-     ]
-    ],
-    "food": [
-     [
-      "Breakfast",
-      800
-     ],
-     [
-      "Kushikatsu lunch in Shinsekai",
-      2000
-     ],
-     [
-      "Dinner at Hozenji Yokocho, Namba",
-      3000
-     ]
-    ]
-   }
-  },
-  {
-   "d": "Fri Nov 13",
-   "short": "Nov 13",
-   "city": "kyoto",
-   "t": "Kyoto day trip: Fushimi Inari, Kiyomizu-dera, Arashiyama",
-   "note": "",
-   "stops": [
-    {
-     "when": "7:15 AM",
-     "name": "Train to Kyoto",
-     "map": "Yodoyabashi Station",
-     "about": "The Keihan line is a private railway that runs straight to Kyoto's eastern sights, so no buses are needed this morning.",
-     "how": "From Namba, Midosuji line to Yodoyabashi (~8 min). Follow the green Keihan signs and take a train toward Demachiyanagi; change to a local train (Tambabashi is easiest) for Fushimi-Inari. About 50 min in total.",
-     "price": "~¥700",
-     "pic": ""
-    },
-    {
-     "when": "8:15 AM",
-     "name": "Fushimi Inari Taisha",
-     "map": "Fushimi Inari Taisha",
-     "about": "Head shrine of Inari, god of rice and business, founded in 711. Thousands of vermilion torii gates, each donated by a business, form tunnels up Mt Inari. Walk to the Yotsutsuji viewpoint (~45 min up) and back.",
-     "how": "From Fushimi-Inari Station (Keihan), walk 5 min east up the shop street to the big gate.",
-     "price": "Free",
-     "pic": "torii"
-    },
-    {
-     "when": "10:30 AM",
-     "name": "Kiyomizu-dera and the old lanes",
-     "map": "Kiyomizu-dera",
-     "about": "A 1,200-year-old hillside temple famous for its huge wooden stage, built without nails. Below it, Sannenzaka and Ninenzaka are stone-paved lanes of old wooden shops and tea houses: have lunch here.",
-     "how": "Back at Fushimi-Inari Station, Keihan line 3 stops north to Kiyomizu-Gojo (~5 min). Then a taxi up the hill (~5 min) or a 20-min uphill walk.",
-     "price": "¥500",
-     "pic": "kiyomizu"
-    },
-    {
-     "when": "2:00 PM",
-     "name": "Arashiyama Bamboo Grove and Tenryu-ji",
-     "map": "Arashiyama Bamboo Grove",
-     "about": "Western Kyoto's riverside district. A path through towering bamboo stalks runs beside Tenryu-ji, a Zen temple with a 700-year-old landscape garden (closes 5:00 PM).",
-     "how": "Taxi from the bottom of Ninenzaka or Yasaka Shrine to Tenryu-ji, about 40 min (~¥4,000, split four ways). The bamboo path starts at Tenryu-ji's north gate.",
-     "price": "¥500",
-     "pic": "bamboo"
-    },
-    {
-     "when": "5:00 PM",
-     "name": "Back to Osaka",
-     "map": "Saga-Arashiyama Station",
-     "about": "JR trains are the quickest way back from western Kyoto.",
-     "how": "Walk 10 min to JR Saga-Arashiyama Station. Sagano line to Kyoto (~15 min), JR Special Rapid to Osaka (~30 min), then Midosuji line to Namba (~10 min).",
-     "price": "~¥1,100",
-     "pic": ""
-    }
-   ],
-   "cost": {
-    "entry": [
-     [
-      "Kiyomizu-dera",
-      500
-     ],
-     [
-      "Tenryu-ji garden",
-      500
-     ]
-    ],
-    "train": [
-     [
-      "Subway + Keihan to Fushimi-Inari",
-      700
-     ],
-     [
-      "Keihan to Kiyomizu-Gojo",
-      200
-     ],
-     [
-      "Taxi up to Kiyomizu (split 4)",
-      300
-     ],
-     [
-      "Taxi to Arashiyama (split 4)",
-      1000
-     ],
-     [
-      "JR back to Osaka",
-      1100
-     ]
-    ],
-    "food": [
-     [
-      "Breakfast",
-      800
-     ],
-     [
-      "Lunch on Ninenzaka",
-      2000
-     ],
-     [
-      "Matcha and snacks",
-      800
-     ],
-     [
-      "Dinner",
-      2500
-     ]
-    ]
-   }
-  },
-  {
-   "d": "Sat Nov 14",
-   "short": "Nov 14",
-   "city": "nara",
-   "t": "Nara day tour, then shinkansen to Tokyo",
-   "note": "Night before: hand your big suitcases to the Osaka hotel front desk for delivery to the Tokyo hotel, so today you only carry day bags.",
-   "stops": [
-    {
-     "when": "8:00 AM",
-     "name": "Kintetsu line to Nara",
-     "map": "Kintetsu-Nara Station",
-     "about": "Kintetsu is the direct private railway between Osaka-Namba and central Nara, with trains about every 10 minutes.",
-     "how": "Check out. From Kintetsu Osaka-Namba Station (underground), take a Rapid Express or Express to Kintetsu-Nara, the last stop (~40 min). Coin lockers are by the ticket gates (~¥400–700).",
-     "price": "~¥700",
-     "pic": ""
-    },
-    {
-     "when": "9:00 AM",
-     "name": "Todai-ji Great Buddha",
-     "map": "Todaiji Temple Nara",
-     "about": "Founded in 752. Its Great Buddha Hall is one of the world's largest wooden buildings and holds a 15 m bronze Buddha. Look for the pillar with a hole: squeezing through is said to bring enlightenment.",
-     "how": "From Kintetsu-Nara, walk about 20 min east along Noborioji street into Nara Park, or take a short taxi.",
-     "price": "¥800",
-     "pic": "buddha"
-    },
-    {
-     "when": "10:30 AM",
-     "name": "Nara Park deer",
-     "map": "Nara Park",
-     "about": "A big park where about 1,300 wild sika deer roam freely. They're seen as messengers of the gods, and many bow for crackers. Keep maps and paper away from them.",
-     "how": "The park surrounds Todai-ji. Vendors along the paths sell shika senbei (deer crackers).",
-     "price": "~¥200",
-     "pic": "deer"
-    },
-    {
-     "when": "11:30 AM",
-     "name": "Kasuga Taisha",
-     "map": "Kasuga Taisha",
-     "about": "Nara's most important Shinto shrine, founded in 768, famous for its 3,000 stone and bronze lanterns along the forest path and inside the vermilion halls.",
-     "how": "From Todai-ji, walk 15–20 min southeast through the park on the lantern-lined path. Afterwards, walk back toward Kintetsu-Nara (~25 min) for lunch near the station.",
-     "price": "¥500",
-     "pic": "lanterns"
-    },
-    {
-     "when": "2:00 PM",
-     "name": "Kintetsu line to Kyoto Station",
-     "map": "Kyoto Station",
-     "about": "Kintetsu's Kyoto line runs from Nara straight into Kyoto Station, where the shinkansen leaves.",
-     "how": "Collect bags. From Kintetsu-Nara, take a train to Kyoto (some need a change at Yamato-Saidaiji), about 45 min. At Kyoto Station, follow the signs to the Shinkansen gates.",
-     "price": "~¥760",
-     "pic": ""
-    },
-    {
-     "when": "3:00 PM",
-     "name": "Shinkansen to Tokyo",
-     "map": "Kyoto Station Shinkansen",
-     "about": "Japan's bullet train. The Nozomi is the fastest service, about 2h15 to Tokyo. On a clear day Mt Fuji appears around the halfway point on the E-seat side.",
-     "how": "Enter the Shinkansen gates with your reserved tickets and board a Tokyo-bound Nozomi. Get off at Tokyo Station, then JR Chuo line to Shinjuku (~15 min) or JR Yamanote to Shibuya, depending on the hotel. Grab an ekiben (train bento) before boarding.",
-     "price": "~¥14,170",
-     "pic": "shinkansen"
-    },
-    {
-     "when": "Evening",
-     "name": "Check in, dinner near the hotel",
-     "map": "",
-     "about": "Your suitcases should be waiting at the front desk.",
-     "how": "A short walk from the hotel.",
-     "price": "",
-     "pic": ""
-    }
-   ],
-   "cost": {
-    "entry": [
-     [
-      "Todai-ji Great Buddha Hall",
-      800
-     ],
-     [
-      "Deer crackers",
-      200
-     ],
-     [
-      "Kasuga Taisha inner area",
-      500
-     ]
-    ],
-    "train": [
-     [
-      "Kintetsu, Namba to Nara",
-      700
-     ],
-     [
-      "Coin locker (shared)",
-      200
-     ],
-     [
-      "Kintetsu, Nara to Kyoto",
-      760
-     ],
-     [
-      "Shinkansen, Kyoto to Tokyo (reserved)",
-      14170
-     ]
-    ],
-    "food": [
-     [
-      "Breakfast",
-      800
-     ],
-     [
-      "Lunch in Nara",
-      1500
-     ],
-     [
-      "Ekiben on the train",
-      1500
-     ],
-     [
-      "Light dinner",
-      2000
-     ]
-    ]
-   }
-  },
-  {
-   "d": "Sun Nov 15",
-   "short": "Nov 15",
-   "city": "tokyo",
-   "t": "Shinjuku day",
-   "note": "",
-   "stops": [
-    {
-     "when": "10:30 AM",
-     "name": "Shinjuku Gyoen",
-     "map": "Shinjuku Gyoen",
-     "about": "A former imperial garden mixing Japanese, English and French styles. In mid-November its ginkgo and maple trees start to turn yellow and red.",
-     "how": "Walk about 10 min from Shinjuku Station's south exit to the Shinjuku Gate, or Marunouchi line to Shinjuku-gyoemmae.",
-     "price": "~¥500",
-     "pic": "garden"
-    },
-    {
-     "when": "2:00 PM",
-     "name": "Tokyo Metropolitan Government Building",
-     "map": "Tokyo Metropolitan Government Building observatory",
-     "about": "Tokyo's city hall. Its 45th-floor observatory is free and on clear days shows Mt Fuji. Afterwards, shop around Shinjuku Station.",
-     "how": "From Shinjuku Station's west exit, walk about 10 min west through the underground passage, or take the Oedo line to Tochomae.",
-     "price": "Free",
-     "pic": "tmg"
-    },
-    {
-     "when": "Dinner",
-     "name": "Omoide Yokocho",
-     "map": "Omoide Yokocho Shinjuku",
-     "about": "\"Memory Lane\", a narrow post-war alley of tiny smoky bars grilling yakitori. Each seats 6–10, so the group may need to try a few doors.",
-     "how": "Right outside Shinjuku Station's west exit, along the train tracks, about 2 min walk.",
-     "price": "",
-     "pic": "alley"
-    }
-   ],
-   "cost": {
-    "entry": [
-     [
-      "Shinjuku Gyoen",
-      500
-     ]
-    ],
-    "train": [
-     [
-      "Tokyo Metro / JR rides",
-      400
-     ]
-    ],
-    "food": [
-     [
-      "Breakfast",
-      800
-     ],
-     [
-      "Lunch",
-      1500
-     ],
-     [
-      "Yakitori at Omoide Yokocho",
-      3500
-     ]
-    ]
-   }
-  },
-  {
-   "d": "Mon Nov 16",
-   "short": "Nov 16",
-   "city": "tokyo",
-   "t": "Asakusa and teamLab",
-   "note": "",
-   "stops": [
-    {
-     "when": "9:00 AM",
-     "name": "Senso-ji and Nakamise",
-     "map": "Sensoji Temple Asakusa",
-     "about": "Tokyo's oldest temple, founded in 628. Enter through Kaminarimon, the Thunder Gate with its giant red lantern, then walk Nakamise, a 250 m street of snack and souvenir stalls.",
-     "how": "From Shinjuku, JR Chuo line to Kanda, then Ginza line to Asakusa (exit 1), about 35 min. The gate is a 1-min walk.",
-     "price": "Free",
-     "pic": "sensoji"
-    },
-    {
-     "when": "Midday",
-     "name": "Sumida River walk",
-     "map": "Sumida Park Tokyo",
-     "about": "A riverside park beside Asakusa with a clear view of Tokyo Skytree, the 634 m broadcast tower. Have lunch in Asakusa first.",
-     "how": "Walk 5 min east from Senso-ji to the river and Sumida Park.",
-     "price": "Free",
-     "pic": "river"
-    },
-    {
-     "when": "2:30 PM",
-     "name": "teamLab Planets",
-     "map": "teamLab Planets Toyosu",
-     "about": "An immersive digital art museum where you walk barefoot through knee-deep water, a garden of floating flowers and infinite mirror rooms. Takes 60–90 min; wear shorts or roll-up pants.",
-     "how": "From Asakusa, Ginza line to Shimbashi, then the Yurikamome line to Shin-Toyosu (~40 min total). The entrance is a 1-min walk.",
-     "price": "¥3,600–4,200",
-     "pic": "teamlab"
-    }
-   ],
-   "cost": {
-    "entry": [
-     [
-      "teamLab Planets (date-based, ¥3,600–4,200)",
-      3800
-     ]
-    ],
-    "train": [
-     [
-      "Metro to Asakusa",
-      200
-     ],
-     [
-      "Asakusa to Shin-Toyosu",
-      500
-     ],
-     [
-      "Back to the hotel",
-      400
-     ]
-    ],
-    "food": [
-     [
-      "Breakfast",
-      800
-     ],
-     [
-      "Lunch in Asakusa",
-      1500
-     ],
-     [
-      "Nakamise snacks",
-      800
-     ],
-     [
-      "Dinner",
-      2500
-     ]
-    ]
-   }
-  },
-  {
-   "d": "Tue Nov 17",
-   "short": "Nov 17",
-   "city": "tokyo",
-   "t": "Mt Takao autumn leaves",
-   "note": "",
-   "stops": [
-    {
-     "when": "9:00 AM",
-     "name": "Keio line to Takaosanguchi",
-     "map": "Takaosanguchi Station",
-     "about": "Keio is a private railway from Shinjuku to the hills west of Tokyo.",
-     "how": "At Shinjuku Station, follow the Keio line signs. Take a Semi-Special or Special Express toward Takaosanguchi (some need a change at Kitano), about 50 min.",
-     "price": "~¥500 each way",
-     "pic": ""
-    },
-    {
-     "when": "10:00 AM",
-     "name": "Mt Takao",
-     "map": "Mount Takao",
-     "about": "A 599 m mountain on the edge of Tokyo with a cable car, the mountain temple Yakuo-in and summit views toward Mt Fuji. One of Tokyo's best autumn-leaf spots, usually peaking Nov 6–20.",
-     "how": "From Takaosanguchi Station, walk 5 min to Kiyotaki cable car station; ride up 6 min. Then follow Trail 1 (paved) about 40 min to the summit via Yakuo-in.",
-     "price": "~¥500 each way",
-     "pic": "mountain"
-    },
-    {
-     "when": "Lunch",
-     "name": "Soba on the mountain",
-     "map": "",
-     "about": "Takao is known for tororo soba: buckwheat noodles with grated mountain yam.",
-     "how": "Restaurants line Trail 1 and the foot of the mountain. Then take the cable car down and the Keio line back to Shinjuku by mid-afternoon.",
-     "price": "",
-     "pic": "soba"
-    }
-   ],
-   "cost": {
-    "entry": [
-     [
-      "Mt Takao cable car, round trip",
-      1000
-     ]
-    ],
-    "train": [
-     [
-      "Keio line, Shinjuku to Takao and back",
-      1000
-     ]
-    ],
-    "food": [
-     [
-      "Breakfast",
-      800
-     ],
-     [
-      "Soba lunch on the mountain",
-      1500
-     ],
-     [
-      "Dinner",
-      2500
-     ]
-    ]
-   }
-  },
-  {
-   "d": "Wed Nov 18",
-   "short": "Nov 18",
-   "city": "tokyo",
-   "t": "Harajuku, Shibuya and the view",
-   "note": "",
-   "stops": [
-    {
-     "when": "9:30 AM",
-     "name": "Meiji Jingu",
-     "map": "Meiji Jingu",
-     "about": "A Shinto shrine to Emperor Meiji inside a 70-hectare forest, entered through giant wooden torii gates. Afterwards: Takeshita Street for youth fashion and crepes, then Omotesando, Tokyo's designer avenue.",
-     "how": "JR Yamanote line from Shinjuku to Harajuku (~5 min). The shrine gate is right outside the station; Takeshita Street is across the road.",
-     "price": "Free",
-     "pic": "meiji"
-    },
-    {
-     "when": "1:30 PM",
-     "name": "Shibuya Crossing and Hachiko",
-     "map": "Shibuya Scramble Crossing",
-     "about": "The world's busiest pedestrian scramble, where up to about 3,000 people cross at once. Hachiko is the statue of the loyal dog who waited at the station for his owner for 9 years.",
-     "how": "Walk 15–20 min from Omotesando down Meiji-dori, or JR Yamanote one stop to Shibuya. Use the Hachiko exit.",
-     "price": "Free",
-     "pic": "crossing"
-    },
-    {
-     "when": "~4:00 PM",
-     "name": "Shibuya Sky",
-     "map": "Shibuya Sky",
-     "about": "An open-air rooftop deck 229 m up on Shibuya Scramble Square, with 360° views and a straight-down look at the crossing. Time it for sunset.",
-     "how": "Shibuya Scramble Square is connected to Shibuya Station; go to the 14th floor for entry. Loose items like hats and bags go in the free lockers before the rooftop.",
-     "price": "¥3,400",
-     "pic": "rooftop"
-    }
-   ],
-   "cost": {
-    "entry": [
-     [
-      "Shibuya Sky (from 15:00, online)",
-      3400
-     ]
-    ],
-    "train": [
-     [
-      "JR / Metro rides",
-      500
-     ]
-    ],
-    "food": [
-     [
-      "Breakfast",
-      800
-     ],
-     [
-      "Takeshita Street crepe",
-      800
-     ],
-     [
-      "Lunch",
-      1500
-     ],
-     [
-      "Dinner in Shibuya",
-      2500
-     ]
-    ]
-   }
-  },
-  {
-   "d": "Thu Nov 19",
-   "short": "Nov 19",
-   "city": "tokyo",
-   "t": "Free day and farewell dinner",
-   "note": "",
-   "stops": [
-    {
-     "when": "Day",
-     "name": "Pick one, or split up",
-     "map": "",
-     "about": "Ameyoko is a lively market street under the train tracks by Ueno Park. Ginza is the upscale shopping district with department-store food halls. Tokyo Station Character Street has shops for Pokémon, Ghibli and other anime.",
-     "how": "Ameyoko: JR Yamanote line to Ueno or Okachimachi. Ginza: Marunouchi line to Ginza. Character Street: Tokyo Station's Yaesu underground mall.",
-     "price": "",
-     "pic": "market"
-    },
-    {
-     "when": "Evening",
-     "name": "Farewell dinner",
-     "map": "",
-     "about": "Last night together: a good night for wagyu, sushi or an izakaya.",
-     "how": "Pick somewhere near the hotel so packing is easy.",
-     "price": "",
-     "pic": "dinner"
-    }
-   ],
-   "cost": {
-    "entry": [],
-    "train": [
-     [
-      "Metro rides around town",
-      600
-     ]
-    ],
-    "food": [
-     [
-      "Breakfast",
-      800
-     ],
-     [
-      "Lunch",
-      1500
-     ],
-     [
-      "Farewell dinner",
-      5000
-     ]
-    ]
-   }
-  },
-  {
-   "d": "Fri Nov 20",
-   "short": "Nov 20",
-   "city": "tokyo",
-   "t": "Departure, no activities",
-   "note": "",
-   "stops": [
-    {
-     "when": "Morning",
-     "name": "Check out and head to the airport",
-     "map": "",
-     "about": "International flights need about 3 hours at the airport for check-in and security.",
-     "how": "Check which airport your flight uses: Haneda (closer) or Narita (farther).",
-     "price": "",
-     "pic": "plane"
-    },
-    {
-     "when": "If Haneda",
-     "name": "Keikyu line or monorail",
-     "map": "Haneda Airport",
-     "about": "Haneda is Tokyo's closer airport, about 30–45 min from the city.",
-     "how": "Keikyu line from Shinagawa, or the Tokyo Monorail from Hamamatsucho.",
-     "price": "¥500–700",
-     "pic": ""
-    },
-    {
-     "when": "If Narita",
-     "name": "Narita Express",
-     "map": "Narita Airport",
-     "about": "Narita is the larger, farther airport. The Narita Express has reserved seats and luggage space.",
-     "how": "From Shinjuku or Tokyo Station, about 60–90 min.",
-     "price": "¥3,000–3,300",
-     "pic": ""
-    }
-   ],
-   "cost": {
-    "entry": [],
-    "train": [
-     [
-      "To Haneda (Narita: about ¥3,200)",
-      600
-     ]
-    ],
-    "food": [
-     [
-      "Breakfast",
-      800
-     ],
-     [
-      "Lunch at the airport",
-      1500
-     ]
-    ]
-   }
-  }
- ],
- "todo": [
-  [
-   "Hotels",
-   "Osaka Nov 11–14 (3 nights) and Tokyo Nov 14–20 (6 nights). Book now; mid-November is busy."
-  ],
-  [
-   "Shinkansen, Nov 14",
-   "Kyoto to Tokyo, mid-afternoon. smartEX app or the station. Seats D and E together."
-  ],
-  [
-   "Suitcase forwarding",
-   "Hand bags to the Osaka hotel front desk on the evening of Nov 13."
-  ],
-  [
-   "teamLab Planets, Nov 16",
-   "Timed tickets; book 2–3 weeks ahead."
-  ],
-  [
-   "Shibuya Sky, Nov 18",
-   "~4:00 PM slot. Sales open about 2 weeks before (around Nov 4). Klook accepts foreign cards."
-  ],
-  [
-   "Visit Japan Web",
-   "Register before flying for faster immigration and customs."
-  ],
-  [
-   "Rapi:t ticket (optional)",
-   "Nov 11 digital ticket is a little cheaper online."
-  ]
- ]
-};
+const DEFAULT = {"version": 0, "days": [{"d": "Wed Nov 11", "short": "Nov 11", "city": "osaka", "t": "Arrive and eat in Dotonbori", "note": "", "stops": [{"when": "6:20 PM", "name": "Land at Kansai Airport", "map": "", "about": "Osaka's international airport, built on a man-made island in Osaka Bay. Allow about an hour for immigration, bags and customs.", "how": "After customs, follow the signs for Railways. The station is across the walkway from Terminal 1 arrivals; Terminal 2 has a free shuttle bus to it.", "price": "", "pic": "plane", "wiki": "Kansai International Airport"}, {"when": "~7:30 PM", "name": "Nankai Rapi:t to Namba", "map": "Kansai Airport Station", "about": "Nankai's limited express into the city: the blue train with round porthole windows, reserved seats and luggage racks. 38 minutes to Namba.", "how": "At Kansai-Airport Station, buy tickets at the Nankai counter or machines (Nankai, not JR). Ride to the last stop, Namba. Cheaper option: the Nankai Airport Express, ~50 min, ¥970.", "price": "¥1,450–1,700", "pic": "train", "wiki": "Rapi:t"}, {"when": "Night", "name": "Dotonbori", "map": "Dotonbori Osaka", "about": "Osaka's canal-side street of neon signs, giant food billboards and the Glico running-man sign. Try takoyaki (octopus balls) and okonomiyaki (savoury pancake).", "how": "From Nankai Namba Station, walk about 10 minutes north following signs for Dotonbori. Ebisu Bridge is the best spot for the Glico sign.", "price": "Free", "pic": "dotonbori", "wiki": "Dōtonbori"}], "cost": {"entry": [], "train": [["Nankai Rapi:t, airport to Namba", 1450]], "food": [["Street-food dinner in Dotonbori", 2000]]}}, {"d": "Thu Nov 12", "short": "Nov 12", "city": "kyoto", "t": "Nara and Kyoto in one day: Todai-ji, deer, Fushimi Inari, Kiyomizu-dera", "note": "A full day with a lot of walking. Start on time: Nara first while it's quiet, then Kyoto in the afternoon. Wear comfortable shoes and carry cash for temples.", "stops": [{"when": "7:30 AM", "name": "Kintetsu line to Nara", "map": "Kintetsu-Nara Station", "about": "Kintetsu is the direct private railway between Osaka-Namba and central Nara, with trains about every 10 minutes.", "how": "From Kintetsu Osaka-Namba Station (underground, below Namba), take a Rapid Express or Express to Kintetsu-Nara, the last stop (~40 min).", "price": "~¥700", "pic": "train", "wiki": ""}, {"when": "8:30 AM", "name": "Todai-ji Great Buddha", "map": "Todaiji Temple Nara", "about": "Founded in 752. Its Great Buddha Hall is one of the world's largest wooden buildings and holds a 15 m bronze Buddha. Look for the pillar with a hole: squeezing through is said to bring enlightenment.", "how": "From Kintetsu-Nara, walk about 20 min east along Noborioji street into Nara Park, or take a short taxi.", "price": "¥800", "pic": "buddha", "wiki": "Tōdai-ji"}, {"when": "9:45 AM", "name": "Nara Park deer", "map": "Nara Park", "about": "A big park where about 1,300 wild sika deer roam freely. They're seen as messengers of the gods, and many bow for crackers. Keep maps and paper away from them.", "how": "The park surrounds Todai-ji; vendors along the paths sell shika senbei (deer crackers). When done, walk about 25 min west to JR Nara Station, or take a short taxi.", "price": "~¥200", "pic": "deer", "wiki": "Nara Park"}, {"when": "11:00 AM", "name": "JR Nara line to Inari", "map": "JR Nara Station", "about": "JR's Nara line runs from Nara toward Kyoto and stops right at the front gate of Fushimi Inari.", "how": "From JR Nara Station, take a train toward Kyoto and change to a local train at Uji (rapid trains don't stop at Inari). Get off at Inari, about 50 min in total. Try kitsune udon for lunch near the station: fox-themed noodles named after Inari's fox messengers.", "price": "~¥700", "pic": "train", "wiki": ""}, {"when": "12:30 PM", "name": "Fushimi Inari Taisha", "map": "Fushimi Inari Taisha", "about": "Head shrine of Inari, god of rice and business, founded in 711. Thousands of vermilion torii gates, each donated by a business, form tunnels up Mt Inari. Walk the Senbon Torii (thousand gates) and go as far up as time allows; 60–90 min is enough.", "how": "Inari Station is directly across from the shrine's main gate.", "price": "Free", "pic": "torii", "wiki": "Fushimi Inari-taisha"}, {"when": "2:30 PM", "name": "Kiyomizu-dera and the old lanes", "map": "Kiyomizu-dera", "about": "A 1,200-year-old hillside temple famous for its huge wooden stage, built without nails. Below it, Sannenzaka and Ninenzaka are stone-paved lanes of old wooden shops and tea houses.", "how": "Walk 5 min to Keihan Fushimi-Inari Station and ride 3 stops north to Kiyomizu-Gojo (~5 min). Then a taxi up the hill (~5 min) or a 20-min uphill walk. The temple closes at 6:00 PM.", "price": "¥500", "pic": "kiyomizu", "wiki": "Kiyomizu-dera"}, {"when": "4:30 PM", "name": "Gion and Pontocho", "map": "Pontocho Kyoto", "about": "Kyoto's old geisha district at dusk, when the lanterns come on, then dinner in Pontocho, a narrow alley of restaurants along the Kamo River. Photos are banned on Gion's private lanes.", "how": "Walk down Ninenzaka to Yasaka Shrine, then straight into Gion along Shijo-dori (~20 min). Pontocho is 10 min further west, across the river.", "price": "", "pic": "alley", "wiki": "Gion"}, {"when": "7:30 PM", "name": "Back to Osaka", "map": "Gion-Shijo Station", "about": "The Keihan line takes you straight back to central Osaka.", "how": "From Keihan Gion-Shijo Station, take a train toward Yodoyabashi (~50 min), then the Midosuji subway to Namba (~8 min).", "price": "~¥700", "pic": "", "wiki": ""}], "cost": {"entry": [["Todai-ji Great Buddha Hall", 800], ["Deer crackers", 200], ["Kiyomizu-dera", 500]], "train": [["Kintetsu, Namba to Nara", 700], ["JR, Nara to Inari", 700], ["Keihan, Inari to Kiyomizu-Gojo", 200], ["Taxi up to Kiyomizu (split 4)", 300], ["Keihan + subway back to Namba", 700]], "food": [["Breakfast", 800], ["Kitsune udon lunch at Inari", 1200], ["Matcha and snacks on Ninenzaka", 800], ["Dinner in Pontocho", 3500]]}}, {"d": "Fri Nov 13", "short": "Nov 13", "city": "osaka", "t": "Osaka city tour: castle, Shinsekai, Umeda Sky", "note": "", "stops": [{"when": "9:00 AM", "name": "Osaka Castle", "map": "Osaka Castle Main Tower", "about": "Built in 1583 by the warlord Toyotomi Hideyoshi. Today's tower is a museum of samurai history with an 8th-floor lookout, set in a big park with massive stone walls and moats.", "how": "From Namba, Midosuji line to Hommachi, change to the Chuo line to Tanimachi 4-chome (exit 9), about 20 min. Then a 15-min walk through the park to the tower.", "price": "¥1,200", "pic": "castle", "wiki": "Osaka Castle"}, {"when": "12:30 PM", "name": "Shinsekai and Tsutenkaku", "map": "Shinsekai Osaka", "about": "\"New World\", a retro neighbourhood from 1912 with neon signs, old arcades and the Tsutenkaku tower. It's the home of kushikatsu, deep-fried skewers; the house rule is no double-dipping in the shared sauce.", "how": "From Tanimachi 4-chome, Tanimachi line to Tennoji (~10 min), then a 10-min walk west. Going up Tsutenkaku is optional.", "price": "Free to walk", "pic": "shinsekai", "wiki": "Shinsekai"}, {"when": "4:00 PM", "name": "Umeda Sky Building", "map": "Umeda Sky Building Floating Garden Observatory", "about": "Twin 173 m towers joined at the top by an open-air rooftop ring, the Floating Garden. One of Osaka's best sunset views (~4:50 PM).", "how": "From Shinsekai, Midosuji line from Dobutsuen-mae to Umeda (~15 min). Walk 10 min northwest from the north side of JR Osaka Station through the underpass. For dinner, Midosuji line back to Namba (~10 min) and walk to Hozenji Yokocho, a lantern-lit stone alley near the hotel.", "price": "~¥2,000", "pic": "umeda", "wiki": "Umeda Sky Building"}], "cost": {"entry": [["Osaka Castle main tower", 1200], ["Umeda Sky Building", 2000]], "train": [["Osaka Metro, 4 rides", 900]], "food": [["Breakfast", 800], ["Kushikatsu lunch in Shinsekai", 2000], ["Dinner at Hozenji Yokocho, Namba", 3000]]}}, {"d": "Sat Nov 14", "short": "Nov 14", "city": "osaka", "t": "Kuromon Market brunch, then shinkansen to Tokyo", "note": "", "stops": [{"when": "9:00 AM", "name": "Kuromon Market", "map": "Kuromon Ichiba Market Osaka", "about": "Osaka's \"kitchen\": a covered market of about 150 stalls selling grilled scallops, wagyu skewers, sushi and fruit. A good last Osaka meal.", "how": "From Namba, walk about 10 min northeast, or Sakaisuji line to Nippombashi (exit 10).", "price": "", "pic": "market", "wiki": "Kuromon Market"}, {"when": "11:00 AM", "name": "Subway to Shin-Osaka", "map": "Shin-Osaka Station", "about": "Shin-Osaka is the shinkansen station for Osaka.", "how": "Check out with your bags. From Namba, Midosuji subway (red line) toward Shin-Osaka, about 15 min, then follow the signs to the Shinkansen gates.", "price": "~¥290", "pic": "train", "wiki": ""}, {"when": "12:00 PM", "name": "Shinkansen to Tokyo", "map": "Shin-Osaka Station Shinkansen", "about": "Japan's bullet train. The Nozomi is the fastest service, about 2h30 from Shin-Osaka to Tokyo. On a clear day Mt Fuji appears after about 1h45 on the E-seat side.", "how": "Board a Tokyo-bound Nozomi with your reserved tickets. Get off at Tokyo Station, then JR Chuo line to Shinjuku (~15 min) or JR Yamanote to Shibuya, depending on the hotel. Buy an ekiben (train bento) for lunch before boarding.", "price": "~¥14,720", "pic": "shinkansen", "wiki": "Tōkaidō Shinkansen"}, {"when": "3:30 PM", "name": "Check in, easy evening", "map": "", "about": "Rest after two big days, then dinner near the hotel.", "how": "A short walk from the hotel.", "price": "", "pic": "", "wiki": ""}], "cost": {"entry": [], "train": [["Subway to Shin-Osaka", 290], ["Shinkansen, Shin-Osaka to Tokyo (reserved)", 14720], ["JR to the hotel", 210]], "food": [["Brunch at Kuromon Market", 2500], ["Ekiben on the train", 1500], ["Dinner", 2500]]}}, {"d": "Sun Nov 15", "short": "Nov 15", "city": "tokyo", "t": "Shinjuku day", "note": "", "stops": [{"when": "10:30 AM", "name": "Shinjuku Gyoen", "map": "Shinjuku Gyoen", "about": "A former imperial garden mixing Japanese, English and French styles. In mid-November its ginkgo and maple trees start to turn yellow and red.", "how": "Walk about 10 min from Shinjuku Station's south exit to the Shinjuku Gate, or Marunouchi line to Shinjuku-gyoemmae.", "price": "~¥500", "pic": "garden", "wiki": "Shinjuku Gyo-en"}, {"when": "2:00 PM", "name": "Tokyo Metropolitan Government Building", "map": "Tokyo Metropolitan Government Building observatory", "about": "Tokyo's city hall. Its 45th-floor observatory is free and on clear days shows Mt Fuji. Afterwards, shop around Shinjuku Station.", "how": "From Shinjuku Station's west exit, walk about 10 min west through the underground passage, or take the Oedo line to Tochomae.", "price": "Free", "pic": "tmg", "wiki": "Tokyo Metropolitan Government Building"}, {"when": "Dinner", "name": "Omoide Yokocho", "map": "Omoide Yokocho Shinjuku", "about": "\"Memory Lane\", a narrow post-war alley of tiny smoky bars grilling yakitori. Each seats 6–10, so the group may need to try a few doors.", "how": "Right outside Shinjuku Station's west exit, along the train tracks, about 2 min walk.", "price": "", "pic": "alley", "wiki": "Omoide Yokochō"}], "cost": {"entry": [["Shinjuku Gyoen", 500]], "train": [["Tokyo Metro / JR rides", 400]], "food": [["Breakfast", 800], ["Lunch", 1500], ["Yakitori at Omoide Yokocho", 3500]]}}, {"d": "Mon Nov 16", "short": "Nov 16", "city": "tokyo", "t": "Asakusa and teamLab", "note": "", "stops": [{"when": "9:00 AM", "name": "Senso-ji and Nakamise", "map": "Sensoji Temple Asakusa", "about": "Tokyo's oldest temple, founded in 628. Enter through Kaminarimon, the Thunder Gate with its giant red lantern, then walk Nakamise, a 250 m street of snack and souvenir stalls.", "how": "From Shinjuku, JR Chuo line to Kanda, then Ginza line to Asakusa (exit 1), about 35 min. The gate is a 1-min walk.", "price": "Free", "pic": "sensoji", "wiki": "Sensō-ji"}, {"when": "Midday", "name": "Sumida River walk", "map": "Sumida Park Tokyo", "about": "A riverside park beside Asakusa with a clear view of Tokyo Skytree, the 634 m broadcast tower. Have lunch in Asakusa first.", "how": "Walk 5 min east from Senso-ji to the river and Sumida Park.", "price": "Free", "pic": "river", "wiki": "Tokyo Skytree"}, {"when": "2:30 PM", "name": "teamLab Planets", "map": "teamLab Planets Toyosu", "about": "An immersive digital art museum where you walk barefoot through knee-deep water, a garden of floating flowers and infinite mirror rooms. Takes 60–90 min; wear shorts or roll-up pants.", "how": "From Asakusa, Ginza line to Shimbashi, then the Yurikamome line to Shin-Toyosu (~40 min total). The entrance is a 1-min walk.", "price": "¥3,600–4,200", "pic": "teamlab", "wiki": "TeamLab Planets"}], "cost": {"entry": [["teamLab Planets (date-based, ¥3,600–4,200)", 3800]], "train": [["Metro to Asakusa", 200], ["Asakusa to Shin-Toyosu", 500], ["Back to the hotel", 400]], "food": [["Breakfast", 800], ["Lunch in Asakusa", 1500], ["Nakamise snacks", 800], ["Dinner", 2500]]}}, {"d": "Tue Nov 17", "short": "Nov 17", "city": "tokyo", "t": "Mt Takao autumn leaves", "note": "", "stops": [{"when": "9:00 AM", "name": "Keio line to Takaosanguchi", "map": "Takaosanguchi Station", "about": "Keio is a private railway from Shinjuku to the hills west of Tokyo.", "how": "At Shinjuku Station, follow the Keio line signs. Take a Semi-Special or Special Express toward Takaosanguchi (some need a change at Kitano), about 50 min.", "price": "~¥500 each way", "pic": "", "wiki": ""}, {"when": "10:00 AM", "name": "Mt Takao", "map": "Mount Takao", "about": "A 599 m mountain on the edge of Tokyo with a cable car, the mountain temple Yakuo-in and summit views toward Mt Fuji. One of Tokyo's best autumn-leaf spots, usually peaking Nov 6–20.", "how": "From Takaosanguchi Station, walk 5 min to Kiyotaki cable car station; ride up 6 min. Then follow Trail 1 (paved) about 40 min to the summit via Yakuo-in.", "price": "~¥500 each way", "pic": "mountain", "wiki": "Mount Takao"}, {"when": "Lunch", "name": "Soba on the mountain", "map": "", "about": "Takao is known for tororo soba: buckwheat noodles with grated mountain yam.", "how": "Restaurants line Trail 1 and the foot of the mountain. Then take the cable car down and the Keio line back to Shinjuku by mid-afternoon.", "price": "", "pic": "soba", "wiki": "Soba"}], "cost": {"entry": [["Mt Takao cable car, round trip", 1000]], "train": [["Keio line, Shinjuku to Takao and back", 1000]], "food": [["Breakfast", 800], ["Soba lunch on the mountain", 1500], ["Dinner", 2500]]}}, {"d": "Wed Nov 18", "short": "Nov 18", "city": "tokyo", "t": "Harajuku, Shibuya and the view", "note": "", "stops": [{"when": "9:30 AM", "name": "Meiji Jingu", "map": "Meiji Jingu", "about": "A Shinto shrine to Emperor Meiji inside a 70-hectare forest, entered through giant wooden torii gates. Afterwards: Takeshita Street for youth fashion and crepes, then Omotesando, Tokyo's designer avenue.", "how": "JR Yamanote line from Shinjuku to Harajuku (~5 min). The shrine gate is right outside the station; Takeshita Street is across the road.", "price": "Free", "pic": "meiji", "wiki": "Meiji Shrine"}, {"when": "1:30 PM", "name": "Shibuya Crossing and Hachiko", "map": "Shibuya Scramble Crossing", "about": "The world's busiest pedestrian scramble, where up to about 3,000 people cross at once. Hachiko is the statue of the loyal dog who waited at the station for his owner for 9 years.", "how": "Walk 15–20 min from Omotesando down Meiji-dori, or JR Yamanote one stop to Shibuya. Use the Hachiko exit.", "price": "Free", "pic": "crossing", "wiki": "Shibuya Crossing"}, {"when": "~4:00 PM", "name": "Shibuya Sky", "map": "Shibuya Sky", "about": "An open-air rooftop deck 229 m up on Shibuya Scramble Square, with 360° views and a straight-down look at the crossing. Time it for sunset.", "how": "Shibuya Scramble Square is connected to Shibuya Station; go to the 14th floor for entry. Loose items like hats and bags go in the free lockers before the rooftop.", "price": "¥3,400", "pic": "rooftop", "wiki": "Shibuya Scramble Square"}], "cost": {"entry": [["Shibuya Sky (from 15:00, online)", 3400]], "train": [["JR / Metro rides", 500]], "food": [["Breakfast", 800], ["Takeshita Street crepe", 800], ["Lunch", 1500], ["Dinner in Shibuya", 2500]]}}, {"d": "Thu Nov 19", "short": "Nov 19", "city": "tokyo", "t": "Free day and farewell dinner", "note": "", "stops": [{"when": "Day", "name": "Pick one, or split up", "map": "", "about": "Ameyoko is a lively market street under the train tracks by Ueno Park. Ginza is the upscale shopping district with department-store food halls. Tokyo Station Character Street has shops for Pokémon, Ghibli and other anime.", "how": "Ameyoko: JR Yamanote line to Ueno or Okachimachi. Ginza: Marunouchi line to Ginza. Character Street: Tokyo Station's Yaesu underground mall.", "price": "", "pic": "market", "wiki": "Ameya-Yokochō"}, {"when": "Evening", "name": "Farewell dinner", "map": "", "about": "Last night together: a good night for wagyu, sushi or an izakaya.", "how": "Pick somewhere near the hotel so packing is easy.", "price": "", "pic": "dinner", "wiki": ""}], "cost": {"entry": [], "train": [["Metro rides around town", 600]], "food": [["Breakfast", 800], ["Lunch", 1500], ["Farewell dinner", 5000]]}}, {"d": "Fri Nov 20", "short": "Nov 20", "city": "tokyo", "t": "Departure, no activities", "note": "", "stops": [{"when": "Morning", "name": "Check out and head to the airport", "map": "", "about": "International flights need about 3 hours at the airport for check-in and security.", "how": "Check which airport your flight uses: Haneda (closer) or Narita (farther).", "price": "", "pic": "plane", "wiki": ""}, {"when": "If Haneda", "name": "Keikyu line or monorail", "map": "Haneda Airport", "about": "Haneda is Tokyo's closer airport, about 30–45 min from the city.", "how": "Keikyu line from Shinagawa, or the Tokyo Monorail from Hamamatsucho.", "price": "¥500–700", "pic": "", "wiki": "Haneda Airport"}, {"when": "If Narita", "name": "Narita Express", "map": "Narita Airport", "about": "Narita is the larger, farther airport. The Narita Express has reserved seats and luggage space.", "how": "From Shinjuku or Tokyo Station, about 60–90 min.", "price": "¥3,000–3,300", "pic": "", "wiki": "Narita Express"}], "cost": {"entry": [], "train": [["To Haneda (Narita: about ¥3,200)", 600]], "food": [["Breakfast", 800], ["Lunch at the airport", 1500]]}}], "todo": [["Hotels", "Osaka Nov 11–14 (3 nights) and Tokyo Nov 14–20 (6 nights). Book now; mid-November is busy."], ["Shinkansen, Nov 14", "Shin-Osaka to Tokyo, around noon. smartEX app or the station. Seats D and E together."], ["teamLab Planets, Nov 16", "Timed tickets; book 2–3 weeks ahead."], ["Shibuya Sky, Nov 18", "~4:00 PM slot. Sales open about 2 weeks before (around Nov 4). Klook accepts foreign cards."], ["Visit Japan Web", "Register before flying for faster immigration and customs."], ["Rapi:t ticket (optional)", "Nov 11 digital ticket is a little cheaper online."]]};
 const M = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
 const CITY = {
   osaka:{c:"var(--osaka)",k:"大阪",n:"Osaka"}, kyoto:{c:"var(--kyoto)",k:"京都",n:"Kyoto"},
@@ -1348,18 +635,73 @@ async function toggleDir(i, k, btn){
   run();
 }
 
+
+// ---------- Real photos ----------
+// 1) Wikipedia / Wikimedia Commons photo of the place  2) Google Street View (if key set)  3) drawn illustration
+const WIKI_FALLBACK = {"Land at Kansai Airport": "Kansai International Airport", "Nankai Rapi:t to Namba": "Rapi:t", "Dotonbori": "Dōtonbori", "Osaka Castle": "Osaka Castle", "Shinsekai and Tsutenkaku": "Shinsekai", "Umeda Sky Building": "Umeda Sky Building", "Fushimi Inari Taisha": "Fushimi Inari-taisha", "Kiyomizu-dera and the old lanes": "Kiyomizu-dera", "Arashiyama Bamboo Grove and Tenryu-ji": "Arashiyama", "Todai-ji Great Buddha": "Tōdai-ji", "Nara Park deer": "Nara Park", "Kasuga Taisha": "Kasuga-taisha", "Kintetsu line to Kyoto Station": "Kyoto Station", "Shinkansen to Tokyo": "Tōkaidō Shinkansen", "Shinjuku Gyoen": "Shinjuku Gyo-en", "Tokyo Metropolitan Government Building": "Tokyo Metropolitan Government Building", "Omoide Yokocho": "Omoide Yokochō", "Senso-ji and Nakamise": "Sensō-ji", "Sumida River walk": "Tokyo Skytree", "teamLab Planets": "TeamLab Planets", "Mt Takao": "Mount Takao", "Soba on the mountain": "Soba", "Meiji Jingu": "Meiji Shrine", "Shibuya Crossing and Hachiko": "Shibuya Crossing", "Shibuya Sky": "Shibuya Scramble Square", "Pick one, or split up": "Ameya-Yokochō", "Keikyu line or monorail": "Haneda Airport", "Narita Express": "Narita Express"};
+const photoCache = {};
+async function wikiPhoto(title){
+  const ck = "jp26-wp:" + title;
+  if(photoCache[ck] !== undefined) return photoCache[ck];
+  const c = store.get(ck); if(c){ try{ return photoCache[ck] = JSON.parse(c) }catch(e){} }
+  let v = null;
+  try{
+    const r = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title.replace(/ /g,"_"))}`);
+    if(r.ok){
+      const j = await r.json();
+      const orig = j.originalimage?.source, th = j.thumbnail?.source;
+      if(th || orig){
+        // ask for an 800px-wide version of the thumbnail when possible
+        const src = th ? th.replace(/\/\d+px-/, "/800px-") : orig;
+        const file = orig ? decodeURIComponent(orig.split("/").pop()) : "";
+        v = {src, fallback: th || orig, credit: file ? "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(file) : (j.content_urls?.mobile?.page || "")};
+      }
+    }
+  }catch(e){}
+  photoCache[ck] = v; store.set(ck, JSON.stringify(v)); return v;
+}
+function streetViewSrc(q){
+  return `https://maps.googleapis.com/maps/api/streetview?size=640x360&scale=2&location=${encodeURIComponent(q + ", Japan")}&radius=150&source=outdoor&fov=90&return_error_code=true&key=${encodeURIComponent(MAPCFG.svKey)}`;
+}
+function loadPhotos(dayIndex){
+  const day = DATA.days[dayIndex];
+  dayEl.querySelectorAll(".stop").forEach((li,k)=>{
+    const s = day.stops[k]; if(!s) return;
+    const title = s.wiki || WIKI_FALLBACK[s.name] || "";
+    const slot = li.querySelector(".photoslot"); if(!slot) return;
+    const put = (src, credit, label, alt) => new Promise(res=>{
+      const img = new Image(); img.alt = alt; img.decoding = "async";
+      img.onload = ()=>{ if(cur!==dayIndex) return res(true);
+        slot.innerHTML = ""; const fig = document.createElement("figure"); fig.className = "photo";
+        fig.appendChild(img);
+        const cap = document.createElement("figcaption");
+        cap.innerHTML = credit ? `<a href="${esc(credit)}" target="_blank" rel="noopener">${label}</a>` : label;
+        fig.appendChild(cap); slot.appendChild(fig); res(true); };
+      img.onerror = ()=>res(false);
+      img.src = src;
+    });
+    (async ()=>{
+      if(title){
+        const w = await wikiPhoto(title);
+        if(w && (await put(w.src, w.credit, "Photo: Wikimedia Commons", `Photo of ${s.name}`) || (w.fallback && await put(w.fallback, w.credit, "Photo: Wikimedia Commons", `Photo of ${s.name}`)))) return;
+      }
+      if(MAPCFG.svKey && s.map && s.pic){ await put(streetViewSrc(s.map), "", "Google Street View", `Street View near ${s.name}`); }
+    })();
+  });
+}
+
 // ---------- Pages ----------
 const pillsEl = $("pills"), dayEl = $("day"), genEl = $("general");
 function renderPills(){
   pillsEl.innerHTML = "";
   const g = document.createElement("button");
-  g.className="pill"; g.type="button"; g.style.setProperty("--c","#4A5568");
-  g.innerHTML="Before you go<small>Bookings, tips</small>";
+  g.className="pill"; g.type="button"; g.style.setProperty("--c","#3A332A");
+  g.innerHTML=`Before you go<small><span lang="ja">準備</span> Bookings, tips</small>`;
   g.onclick=()=>showInfo(true); pillsEl.appendChild(g);
   DATA.days.forEach((d,i)=>{
     const b=document.createElement("button"); b.className="pill"; b.type="button";
     b.style.setProperty("--c", CITY[d.city].c);
-    b.innerHTML=`${esc(d.short)}<small>${CITY[d.city].n}</small>`;
+    b.innerHTML=`${esc(d.short)}<small><span lang="ja">${CITY[d.city].k}</span> ${CITY[d.city].n}</small>`;
     b.onclick=()=>show(i,true); pillsEl.appendChild(b);
   });
   markPill();
@@ -1375,7 +717,7 @@ function show(i, user){
     const name = s.map ? `<a href="${M(s.map)}" target="_blank" rel="noopener">${esc(s.name)}</a>` : esc(s.name);
     const price = s.price ? `<span class="price${s.price==="Free"?" free":""}">${esc(s.price)}</span>` : "";
     const tools = editing ? `<div class="tools"><button type="button" data-act="edit" data-k="${k}">Edit</button><button type="button" data-act="up" data-k="${k}" ${k===0?"disabled":""} aria-label="Move up">↑</button><button type="button" data-act="down" data-k="${k}" ${k===d.stops.length-1?"disabled":""} aria-label="Move down">↓</button><button type="button" data-act="del" data-k="${k}">Delete</button></div>` : "";
-    return `<li class="stop">${tools}<div class="when">${esc(s.when)}</div>${pic(s)}<div class="what">${name}</div>${s.about?`<p class="about">${esc(s.about)}</p>`:""}${s.how?`<p class="go"><b>How to get there:</b> ${esc(s.how)}</p>`:""}${price}${s.map?`<button type="button" class="dirbtn" data-k="${k}" aria-expanded="false">Map and directions</button><div class="dirpanel" hidden></div>`:""}</li>`;
+    return `<li class="stop">${tools}<div class="when">${esc(s.when)}</div><div class="photoslot">${pic(s)}</div><div class="what">${name}</div>${s.about?`<p class="about">${esc(s.about)}</p>`:""}${s.how?`<p class="go"><b>How to get there:</b> ${esc(s.how)}</p>`:""}${price}${s.map?`<button type="button" class="dirbtn" data-k="${k}" aria-expanded="false">Map and directions</button><div class="dirpanel" hidden></div>`:""}</li>`;
   }).join("");
   const prev = i>0 ? DATA.days[i-1].short : "", next = i<DATA.days.length-1 ? DATA.days[i+1].short : "";
   dayEl.style.setProperty("--c", c.c);
@@ -1394,6 +736,7 @@ function show(i, user){
     ${d.note?`<p class="note">${esc(d.note)}</p>`:""}
     ${costHTML(d)}`;
   dayEl.querySelectorAll(".dirbtn").forEach(b=>b.onclick=()=>toggleDir(i,+b.dataset.k,b));
+  loadPhotos(i);
   $("pv").onclick=()=> i===0 ? showInfo(true) : show(i-1,true);
   $("nx").onclick=()=> show(i+1,true);
   if(editing){
@@ -1477,14 +820,14 @@ $("fPic").innerHTML = `<option value="">No picture</option>` + PIC_KEYS.map(k=>`
 let stopTarget=null;
 function openStopDlg(i,k){
   stopTarget=[i,k];
-  const s = k>=0 ? DATA.days[i].stops[k] : {when:"",name:"",map:"",about:"",how:"",price:"",pic:""};
+  const s = k>=0 ? {...DATA.days[i].stops[k], wiki: DATA.days[i].stops[k].wiki || WIKI_FALLBACK[DATA.days[i].stops[k].name] || ""} : {when:"",name:"",map:"",about:"",how:"",price:"",pic:""};
   $("stopTitle").textContent = k>=0 ? "Edit stop" : "Add a stop";
-  for(const f of ["when","name","map","about","how","price","pic"]) $("f"+f[0].toUpperCase()+f.slice(1)).value = s[f]||"";
+  for(const f of ["when","name","map","about","how","price","pic","wiki"]) $("f"+f[0].toUpperCase()+f.slice(1)).value = s[f]||"";
   $("stopDlg").showModal();
 }
 $("stopForm").onsubmit = e=>{
   e.preventDefault();
-  const s={}; for(const f of ["when","name","map","about","how","price","pic"]) s[f]=$("f"+f[0].toUpperCase()+f.slice(1)).value.trim();
+  const s={}; for(const f of ["when","name","map","about","how","price","pic","wiki"]) s[f]=$("f"+f[0].toUpperCase()+f.slice(1)).value.trim();
   const [i,k]=stopTarget; if(k>=0) DATA.days[i].stops[k]=s; else DATA.days[i].stops.push(s);
   $("stopDlg").close(); changed();
 };
@@ -1535,6 +878,12 @@ async function askAI(mode){
 }
 $("aiGo").onclick=()=>askAI("edit");
 $("aiCost").onclick=()=>askAI("costs");
+$("useBuiltin").onclick=()=>{
+  if(!confirm("Replace the whole plan on screen with the built-in plan that came with this version of the app? Nothing changes for others until you tap Save for everyone.")) return;
+  DATA = clone(DEFAULT); setDirty(true); $("costHint").hidden = true;
+  $("aiStatus").textContent = "Built-in plan loaded. Check it, then tap Save for everyone (or Discard).";
+  rerender();
+};
 
 function flash(t){ const f=$("flash"); f.textContent=t; f.hidden=false; clearTimeout(flash.t); flash.t=setTimeout(()=>f.hidden=true,3500); }
 

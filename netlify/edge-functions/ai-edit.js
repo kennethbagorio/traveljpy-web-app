@@ -13,7 +13,8 @@ The data has exactly 10 days (index 0 = Nov 11 ... index 9 = Nov 20). Each day:
   "stops": [ { "when": "9:00 AM", "name": "place name", "map": "Google Maps search query",
                "about": "what the place is and what to do there, 1–3 sentences",
                "how": "step-by-step directions from the previous stop or the hotel: line names, transfers, exits, minutes",
-               "price": "per-person entry label like ¥500, Free, or empty", "pic": "one of the picture keys or empty" } ],
+               "price": "per-person entry label like ¥500, Free, or empty", "pic": "one of the picture keys or empty",
+               "wiki": "exact English Wikipedia article title for a photo of this place (e.g. Osaka Castle, Fushimi Inari-taisha), or empty for train rides, meals and hotels" } ],
   "cost": { "entry": [["label", yen]], "train": [["label", yen]], "food": [["label", yen]] } }
 
 Picture keys: ${PIC_KEYS.join(", ")}. Use one only if it genuinely matches the place; otherwise "".
@@ -33,7 +34,8 @@ export default async (req) => {
   if (req.method !== "POST") return json({ error: "Method not allowed" }, 405);
   const passcode = Netlify.env.get("EDIT_PASSCODE");
   const key = Netlify.env.get("OPENAI_API_KEY");
-  if (!passcode || !key) return json({ error: "OPENAI_API_KEY or EDIT_PASSCODE is not set on the server" }, 500);
+  const missing = [!key && "OPENAI_API_KEY", !passcode && "EDIT_PASSCODE"].filter(Boolean);
+  if (missing.length) return json({ error: `${missing.join(" and ")} ${missing.length > 1 ? "are" : "is"} not set for this deploy. Check the variable in Netlify (Functions scope, Production value), then trigger a new deploy.` }, 500);
 
   let body;
   try { body = await req.json(); } catch { return json({ error: "Bad request" }, 400); }
